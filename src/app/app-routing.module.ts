@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './auth/login/login/login.component';
 import { SignupComponent } from './auth/signup/signup/signup.component';
 import { BulidingFormComponent } from './buliding-form/buliding-form.component';
-
+import { BuildingListingsComponent } from './building-listings/building-listings.component';
 
 
 const routes: Routes = [
@@ -16,10 +16,15 @@ const routes: Routes = [
     path: "signup",
     component: SignupComponent
   },
- {
-  path: "create-building",
-  component: BulidingFormComponent
- },
+  {
+    path: "create-building",
+    component: BulidingFormComponent
+  },
+  {
+    path: "building-listings",
+    component: BuildingListingsComponent
+  },
+
 ]
 
 
