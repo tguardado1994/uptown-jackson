@@ -8,6 +8,8 @@ import { NaviComponent } from './shared/navi/navi.component';
 import { SignupComponent } from './auth/signup/signup/signup.component';
 import { LoginComponent } from './auth/login/login/login.component';
 import { BulidingFormComponent } from './buliding-form/buliding-form.component';
+import { BuildingListingsComponent } from './building-listings/building-listings.component';
+import { EditBuildingComponent } from './edit-building/edit-building.component';
 
 
 @NgModule({
@@ -17,6 +19,8 @@ import { BulidingFormComponent } from './buliding-form/buliding-form.component';
     SignupComponent,
     LoginComponent,
     BulidingFormComponent,
+    BuildingListingsComponent,
+    EditBuildingComponent,
 
   ],
 

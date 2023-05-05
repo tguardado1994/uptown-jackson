@@ -1,0 +1,34 @@
+.resize {
+  width: 30%;
+  height: auto;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.col {
+  flex: 1;
+  margin: 0.5rem;
+  padding: 1rem;
+  background-color: #eee;
+}
+
+button {
+  display: flex;
+  float: right;
+  margin-top: -40px;
+}
+
+.edit, .delete{
+  display: inline-block;
+  padding: 10px 10px;
+}
+
+
+
+
+
+
+
