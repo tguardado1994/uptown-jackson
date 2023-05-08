@@ -10,6 +10,8 @@ import { LoginComponent } from './auth/login/login/login.component';
 import { BulidingFormComponent } from './buliding-form/buliding-form.component';
 import { BuildingListingsComponent } from './building-listings/building-listings.component';
 import { EditBuildingComponent } from './edit-building/edit-building.component';
+import { HttpClientModule } from '@angular/common/http';
+import { BuildingDetailComponent } from './building-detail/building-detail.component';
 
 
 @NgModule({
@@ -21,15 +23,17 @@ import { EditBuildingComponent } from './edit-building/edit-building.component';
     BulidingFormComponent,
     BuildingListingsComponent,
     EditBuildingComponent,
+    BuildingDetailComponent,
 
   ],
 
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+     HttpClientModule
   ],
-  providers: [],
+  providers: [ ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

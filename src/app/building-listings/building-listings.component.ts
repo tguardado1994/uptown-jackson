@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { BuildingService } from '../shared/services/building.service';
+
 
 
 @Component({
@@ -8,7 +10,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BuildingListingsComponent implements OnInit {
 
-  constructor() { }
+  constructor(private buildingService: BuildingService) { }
 
   ngOnInit(): void {
   }
