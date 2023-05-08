@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap, Route, Router } from '@angular/router';
 
+
 @Component({
   selector: 'app-building-detail',
   templateUrl: './building-detail.component.html',
