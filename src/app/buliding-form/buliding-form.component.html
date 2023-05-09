@@ -1,22 +1,22 @@
 <h1>Create Building Listing</h1>
 
-<form [formGroup]="buildingFormGroup">
+<form [formGroup]="buildingFormGroup" (ngSubmit)="onSubmit()" >
   <label>Building Address</label>
-  <input type= "text" class="form-control" formControlName="address"><br><br>
+  <input type= "text" class="form-control" formControlName="building_address"><br><br>
 
   <label>Contact Name</label>
-  <input type="text" class="form-control" formControlName="contact"><br><br>
+  <input type="text" class="form-control" formControlName="building_contact_name"><br><br>
 
 
   <label>Contact Email</label>
-  <input type="text" class="form-control" formControlName="email"><br><br>
+  <input type="text" class="form-control" formControlName="building_contact_email"><br><br>
 
 
   <label>Square Footage</label>
   <input type="text" class="form-control" formControlName="square_footage"><br><br>
 
   <label>Building Image</label>
-  <input type="text" class="form-control" formControlName="image_path">
+  <input type="text" class="form-control" formControlName="image_url">
 
   <div class="space">
   <input type="submit" value="Create Listing">

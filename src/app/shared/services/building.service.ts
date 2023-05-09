@@ -19,4 +19,12 @@ export class BuildingService {
   getBuildings(){
     return this.http.get<BaseResponse<Building[]>>(this.BASE_URL + '/buildings/index')
   }
+
+ createBuilding(building: Building) {
+  return this.http.post<BaseResponse<Building>>(this.BASE_URL + '/buildings', building);
+ }
+
+ editBulding(id: number){}
+
+ deleteBuilding(id: number){}
 }
