@@ -9,3 +9,8 @@
   <p>Contact Email</p>
   <p>Square Footage</p>
 </div>
+
+
+<div *ngIf="building$ | async as Building">
+  {{Building.building_address}}
+</div>

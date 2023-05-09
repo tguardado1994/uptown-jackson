@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BuildingService } from '../shared/services/building.service';
+import { map } from 'rxjs';
+
 
 
 
@@ -10,6 +12,7 @@ import { BuildingService } from '../shared/services/building.service';
 })
 export class BuildingListingsComponent implements OnInit {
 
+    public buildings$ = this.buildingService.getBuildings().pipe(map((data) => data.data))
   constructor(private buildingService: BuildingService) { }
 
   ngOnInit(): void {
