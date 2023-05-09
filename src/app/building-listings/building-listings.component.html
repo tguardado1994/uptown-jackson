@@ -5,15 +5,15 @@
 </div>
 
 <hr>
-<div class="row">
-<img src="https://www.semissourian.com/photos/27/83/20/2783203-B.jpg" class="resize" alt="nice building">
-<div class="col">
-  <p>Address</p>
-  <p>Contact Name</p>
-  <p>Contact Email</p>
-  <p>Square Footage</p>
+ <div class="row" *ngFor="let building of buildings$ | async">
+<img src={{building.image_url}} class="resize" alt="nice building">
+<div class="col" >
+  <p>Address:  {{ building.building_address }}</p>
+  <p>Contact Name: {{building.building_contact_name}}</p>
+  <p>Contact Email: {{building.building_contact_email}}</p>
+  <p>Square Footage: {{building.square_footage}}</p>
 
-  <a routerLink="/building-detail">More Detail</a>
+ <a routerLink="/building-detail">More Detail</a>
   <a routerLink="/edit-building" class="button edit">Edit</a>
   <a class="button delete">Delete</a>
 </div>

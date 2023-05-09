@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap, Route, Router } from '@angular/router';
+import { BuildingService } from '../shared/services/building.service';
+import { Building } from '../shared/interfaces/building';
+import { Observable, Subscription, map } from 'rxjs';
 
 
 @Component({
@@ -7,12 +10,25 @@ import { ActivatedRoute, ParamMap, Route, Router } from '@angular/router';
   templateUrl: './building-detail.component.html',
   styleUrls: ['./building-detail.component.css']
 })
-export class BuildingDetailComponent implements OnInit {
+export class BuildingDetailComponent implements OnInit, OnDestroy {
 
-  constructor(private router: ActivatedRoute) { }
+public building$: Observable<Building> | undefined
+public subsciption: Subscription | undefined
+  constructor(private router: ActivatedRoute, private buildingService: BuildingService) { }
 
   ngOnInit(): void {
-    console.log(this.router.paramMap.subscribe((params: ParamMap)=>{console.log(params.get('id'))}));
+    this.subsciption = this.router.paramMap.subscribe((params: ParamMap)=>{
+      const id = params.get('id')
+      if (id) {
+        this.building$ = this.buildingService.getBuilding(parseInt(id)).pipe(map((data) => data.data));
+      }
+
+    });
+
+  }
+
+  ngOnDestroy(): void {
+      this.subsciption?.unsubscribe()
   }
 
 }
