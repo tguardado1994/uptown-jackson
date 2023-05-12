@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
+import { BuildingService } from '../shared/services/building.service';
 
 @Component({
   selector: 'app-edit-building',
@@ -16,11 +17,11 @@ export class EditBuildingComponent implements OnInit {
     square_footage: new FormControl('')
   })
 
-
-
-  constructor() { }
+  constructor(private buildingService:BuildingService) { }
 
   ngOnInit(): void {
   }
+
+  onSubmit(){}
 
 }

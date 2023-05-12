@@ -27,7 +27,7 @@ const routes: Routes = [
     component: BuildingListingsComponent
   },
   {
-    path: "edit-building",
+    path: "edit-building/:id",
     component: EditBuildingComponent
   },
   {

@@ -24,7 +24,9 @@ export class BuildingService {
   return this.http.post<BaseResponse<Building>>(this.BASE_URL + '/buildings', building);
  }
 
- editBulding(id: number){}
+ editBulding(id: number, building: Building){
+  return this.http.put<BaseResponse<Building>>(this.BASE_URL + '/buildings/${id}', building);
+ }
 
  deleteBuilding(id: number){}
 }
