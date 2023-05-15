@@ -21,12 +21,14 @@ export class BuildingService {
   }
 
  createBuilding(building: Building) {
-  return this.http.post<BaseResponse<Building>>(this.BASE_URL + '/buildings', building);
+  return this.http.post<BaseResponse<Building>>(this.BASE_URL + '/building', building);
  }
 
  editBulding(id: number, building: Building){
   return this.http.put<BaseResponse<Building>>(this.BASE_URL + '/buildings/${id}', building);
  }
 
- deleteBuilding(id: number){}
+ deleteBuilding(id: number){
+  return this.http.delete<BaseResponse<Building>>(this.BASE_URL + '/buildings/${id}');
+ }
 }

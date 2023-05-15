@@ -3,8 +3,6 @@ import { BuildingService } from '../shared/services/building.service';
 import { map } from 'rxjs';
 
 
-
-
 @Component({
   selector: 'app-building-listings',
   templateUrl: './building-listings.component.html',
@@ -18,4 +16,18 @@ export class BuildingListingsComponent implements OnInit {
   ngOnInit(): void {
   }
 
-}
+  deleteBuilding(id: number){
+    this.buildingService.deleteBuilding(id).subscribe(
+      (response) => {
+        console.log('Building deleted successfully!', response);
+
+      },
+      (error) => {
+        console.error('Failed to delete building.', error);
+
+      }
+    );
+  }
+  }
+
+
