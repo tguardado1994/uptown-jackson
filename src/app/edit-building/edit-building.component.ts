@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
+import { BuildingService } from '../shared/services/building.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-edit-building',
@@ -8,7 +10,12 @@ import { FormGroup, FormControl } from '@angular/forms';
 })
 export class EditBuildingComponent implements OnInit {
 
-  editFormGroup = new FormGroup({
+editFormGroup: any;
+
+  constructor(private buildingService:BuildingService, private route: Router) { }
+
+  ngOnInit(): void {
+    this.editFormGroup = new FormGroup({
     address: new FormControl(''),
     contact: new FormControl(''),
     image_path: new FormControl(''),
@@ -16,11 +23,10 @@ export class EditBuildingComponent implements OnInit {
     square_footage: new FormControl('')
   })
 
+  }
 
+  onSubmit(){
 
-  constructor() { }
-
-  ngOnInit(): void {
   }
 
 }

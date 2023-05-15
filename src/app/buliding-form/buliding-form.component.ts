@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
+import { BuildingService } from '../shared/services/building.service';
+import { Building } from '../shared/interfaces/building';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-buliding-form',
@@ -9,10 +13,10 @@ import { FormGroup, FormControl } from '@angular/forms';
 export class BulidingFormComponent implements OnInit {
 
   buildingFormGroup = new FormGroup({
-    address: new FormControl(''),
-    contact: new FormControl(''),
-    image_path: new FormControl(''),
-    email: new FormControl(''),
+    building_address: new FormControl(''),
+    building_contact_name: new FormControl(''),
+    image_url: new FormControl(''),
+    building_contact_email: new FormControl(''),
     square_footage: new FormControl('')
   })
 
@@ -23,4 +27,11 @@ export class BulidingFormComponent implements OnInit {
   ngOnInit(): void {
   }
 
-}
+
+  }
+
+
+
+
+
+
