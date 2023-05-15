@@ -26,17 +26,7 @@ editFormGroup: any;
   }
 
   onSubmit(){
-    const editBuilding = this.editFormGroup.value;
 
-    this.buildingService.createBuilding(editBuilding).subscribe(
-      (response) => {
-        console.log('Building edit successfully!', response);
-        this.route.navigate(['/building-listings'])
-      },
-      (error) => {
-        console.error('Failed to edit building.', error);
-      }
-    );
   }
 
 }

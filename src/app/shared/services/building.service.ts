@@ -22,10 +22,10 @@ export class BuildingService {
 
 
  editBulding(id: number, building: Building){
-  return this.http.put<BaseResponse<Building>>(this.BASE_URL + '/buildings/${id}', building);
+  return this.http.put<BaseResponse<Building>>(this.BASE_URL + `/buildings/${id}`, building);
  }
 
  deleteBuilding(id: number){
-  return this.http.delete<BaseResponse<Building>>(this.BASE_URL + '/buildings/${id}');
+  return this.http.delete<BaseResponse<Building>>(this.BASE_URL + `/buildings/${id}`);
  }
 }
