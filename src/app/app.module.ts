@@ -17,6 +17,7 @@ import { BuildingsComponent } from './features/buildings/buildings.component';
 import { BuildingDetailComponent } from './features/buildings/building-detail.component';
 import { LandingComponent } from './features/landing/landing.component';
 import { AccountComponent } from './features/account/account.component';
+import { ArrowIconComponent } from './shared/components/icons/arrow-icon.component';
 
 
 @NgModule({
@@ -32,7 +33,8 @@ import { AccountComponent } from './features/account/account.component';
     BuildingsComponent,
     BuildingDetailComponent,
     LandingComponent,
-    AccountComponent
+    AccountComponent,
+    ArrowIconComponent
   ],
 
   imports: [

@@ -9,11 +9,13 @@ import { BuildingDetailComponent } from './features/buildings/building-detail.co
 import { AuthGuard } from './shared/misc/auth.guard';
 import { LandingComponent } from './features/landing/landing.component';
 import { AccountComponent } from './features/account/account.component';
+import { AuthRedirect } from './shared/misc/authRedirect.guard';
 
 const routes: Routes = [
   {
     path: '',
     component: LandingComponent,
+    canActivate: [AuthRedirect]
   },
   {
     path: 'login',

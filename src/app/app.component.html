@@ -1,4 +1,4 @@
-<app-nav></app-nav>
+<app-nav *ngIf="showNavbar"></app-nav>
 <router-outlet></router-outlet>
 <ng-container *ngFor="let toast of toastService.toasts$ | async">
   <app-toast [toastMessage]="toast.message" [type]="toast.type"></app-toast>

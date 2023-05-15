@@ -112,7 +112,6 @@ export class BuildingCreateFormComponent implements OnDestroy {
       this.subscription.add(
         this.buildingService.createBuilding(formValue).subscribe({
           next: (res) => {
-            console.log(res);
             this.toastService.showToast({
               type: 'success',
               message: 'Building created successfully!',

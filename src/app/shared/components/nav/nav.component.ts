@@ -70,29 +70,6 @@ import { shareReplay } from 'rxjs';
       </div>
     </nav>
   `,
-  styles: [
-    `
-      .underline-hover {
-        position: relative;
-        text-decoration: none;
-      }
-      .underline-hover::after {
-        content: '';
-        position: absolute;
-        width: 0;
-        height: 2px;
-        bottom: 0;
-        left: 0;
-        background-color: white;
-        visibility: hidden;
-        transition: all 0.3s ease-in-out;
-      }
-      .underline-hover:hover::after {
-        visibility: visible;
-        width: 100%;
-      }
-    `,
-  ],
 })
 export class NavComponent implements OnInit {
   public user$ = this.userService.user.pipe(shareReplay(1));
