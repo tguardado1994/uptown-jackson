@@ -4,27 +4,35 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { NaviComponent } from './shared/navi/navi.component';
-import { SignupComponent } from './auth/signup/signup/signup.component';
-import { LoginComponent } from './auth/login/login/login.component';
-import { BulidingFormComponent } from './buliding-form/buliding-form.component';
-import { BuildingListingsComponent } from './building-listings/building-listings.component';
-import { EditBuildingComponent } from './edit-building/edit-building.component';
+import { SignupComponent } from './auth/signup.component';
+import { LoginComponent } from './auth/login.component';
 import { HttpClientModule } from '@angular/common/http';
-import { BuildingDetailComponent } from './building-detail/building-detail.component';
+import { CookieService } from 'ngx-cookie-service';
+import { ToastComponent } from './shared/components/ui/toast.component';
+import { ButtonComponent } from './shared/components/ui/button.component';
+import { NavComponent } from './shared/components/nav/nav.component';
+import { BuildingCreateFormComponent } from './features/buildings/building-create-form.component';
+import { BuildingEditFormComponent } from './features/buildings/building-edit-form.component';
+import { BuildingsComponent } from './features/buildings/buildings.component';
+import { BuildingDetailComponent } from './features/buildings/building-detail.component';
+import { LandingComponent } from './features/landing/landing.component';
+import { AccountComponent } from './features/account/account.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    NaviComponent,
     SignupComponent,
     LoginComponent,
-    BulidingFormComponent,
-    BuildingListingsComponent,
-    EditBuildingComponent,
+    ToastComponent,
+    ButtonComponent,
+    NavComponent,
+    BuildingCreateFormComponent,
+    BuildingEditFormComponent,
+    BuildingsComponent,
     BuildingDetailComponent,
-
+    LandingComponent,
+    AccountComponent
   ],
 
   imports: [
@@ -33,7 +41,7 @@ import { BuildingDetailComponent } from './building-detail/building-detail.compo
     ReactiveFormsModule,
      HttpClientModule
   ],
-  providers: [ ],
+  providers: [CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

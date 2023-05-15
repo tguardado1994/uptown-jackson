@@ -1,46 +1,56 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LoginComponent } from './auth/login/login/login.component';
-import { SignupComponent } from './auth/signup/signup/signup.component';
-import { BulidingFormComponent } from './buliding-form/buliding-form.component';
-import { BuildingListingsComponent } from './building-listings/building-listings.component';
-import { EditBuildingComponent } from './edit-building/edit-building.component';
-import { BuildingDetailComponent } from './building-detail/building-detail.component';
-
+import { LoginComponent } from './auth/login.component';
+import { SignupComponent } from './auth/signup.component';
+import { BuildingCreateFormComponent } from './features/buildings/building-create-form.component';
+import { BuildingEditFormComponent } from './features/buildings/building-edit-form.component';
+import { BuildingsComponent } from './features/buildings/buildings.component';
+import { BuildingDetailComponent } from './features/buildings/building-detail.component';
+import { AuthGuard } from './shared/misc/auth.guard';
+import { LandingComponent } from './features/landing/landing.component';
+import { AccountComponent } from './features/account/account.component';
 
 const routes: Routes = [
-
   {
-    path: "login",
-    component: LoginComponent
+    path: '',
+    component: LandingComponent,
   },
   {
-    path: "signup",
-    component: SignupComponent
+    path: 'login',
+    component: LoginComponent,
   },
   {
-    path: "create-building",
-    component: BulidingFormComponent
+    path: 'signup',
+    component: SignupComponent,
   },
   {
-    path: "building-listings",
-    component: BuildingListingsComponent
+    path: 'account',
+    component: AccountComponent,
   },
   {
-    path: "edit-building",
-    component: EditBuildingComponent
+    path: 'buildings',
+    children: [
+      { path: '', component: BuildingsComponent },
+      {
+        path: 'create',
+        component: BuildingCreateFormComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'edit',
+        component: BuildingEditFormComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'detail/:id',
+        component: BuildingDetailComponent,
+      },
+    ],
   },
-  {
-    path: "building-detail/:id",
-    component: BuildingDetailComponent
-  },
-
-]
-
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-
 export class AppRoutingModule {}

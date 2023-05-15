@@ -1,3 +1,16 @@
 html {
     scroll-behavior: smooth;
 }
+
+.bg-green {
+  background-color: #80AC99;
+}
+
+button.bg-green:hover {
+  background-color: #698378;
+}
+
+.green {
+  color: #80AC99;
+}
+
