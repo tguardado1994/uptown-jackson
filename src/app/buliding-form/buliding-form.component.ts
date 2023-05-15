@@ -22,30 +22,12 @@ export class BulidingFormComponent implements OnInit {
 
 
 
-  constructor(private buildingService: BuildingService, private route: Router) { }
+  constructor() { }
 
   ngOnInit(): void {
   }
 
-  onSubmit() {
-    const newBuilding: Building = {
-      building_address: this.buildingFormGroup.value.building_address!,
-      building_contact_name: this.buildingFormGroup.value.building_contact_name!,
-      image_url: this.buildingFormGroup.value.image_url!,
-      building_contact_email: this.buildingFormGroup.value.building_contact_email!,
-      square_footage: this.buildingFormGroup.value.square_footage!
-    };
 
-    this.buildingService.createBuilding(newBuilding).subscribe(
-      (response) => {
-        console.log('Building created successfully!', response);
-        this.route.navigate(['/building-listings'])
-      },
-      (error) => {
-        console.error('Failed to create building.', error);
-      }
-    );
-  }
   }
 
 

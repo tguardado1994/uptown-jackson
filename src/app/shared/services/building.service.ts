@@ -20,9 +20,6 @@ export class BuildingService {
     return this.http.get<BaseResponse<Building[]>>(this.BASE_URL + '/buildings/index')
   }
 
- createBuilding(building: Building) {
-  return this.http.post<BaseResponse<Building>>(this.BASE_URL + '/building', building);
- }
 
  editBulding(id: number, building: Building){
   return this.http.put<BaseResponse<Building>>(this.BASE_URL + '/buildings/${id}', building);
