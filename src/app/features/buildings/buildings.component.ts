@@ -6,7 +6,7 @@ import { UserService } from 'src/app/shared/services/user.service';
 @Component({
   selector: 'app-buildings',
   template: `
-    <div class="container">
+    <!-- <div class="container">
       <div class="row" *ngIf="userService.user | async">
         <app-button routerLink="create" buttonText="Add Your Building" styles="my-3"></app-button>
       </div>
@@ -37,7 +37,27 @@ import { UserService } from 'src/app/shared/services/user.service';
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
+    <h1>Uptown Jackson Rent or Buy</h1>
+
+<div>
+<button routerLink="/create-building" >Create Listing</button>
+</div>
+
+<hr>
+ <div class="row" *ngFor="let building of buildings$ | async">
+<img src={{building.image_url}} class="resize" alt="nice building">
+<div class="col" >
+  <p>Address:  {{ building.building_address }}</p>
+  <p>Contact Name: {{building.building_contact_name}}</p>
+  <p>Contact Email: {{building.building_contact_email}}</p>
+  <p>Square Footage: {{building.square_footage}}</p>
+
+  <a routerLink="/building-detail/:id">More Detail</a>
+  <a routerLink="/edit-building" class="button edit">Edit</a>
+  <a class="button delete">Delete</a>
+</div>
+
   `,
 })
 export class BuildingsComponent {
@@ -46,4 +66,17 @@ export class BuildingsComponent {
     map((data: any) => data.data.buildings)
   );
   constructor(private buildingsService: BuildingService, public userService: UserService) {}
+
+  deleteBuilding(id: number){
+    this.buildingsService.deleteBuilding(id).subscribe(
+      (response) => {
+        console.log('Building deleted successfully!', response);
+
+      },
+      (error) => {
+        console.error('Failed to delete building.', error);
+
+      }
+    );
+  }
 }
