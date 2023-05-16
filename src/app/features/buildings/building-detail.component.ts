@@ -8,32 +8,36 @@ import { BuildingService } from 'src/app/shared/services/building.service';
 @Component({
   selector: 'app-building-detail',
   template: `
-    <div class="container mt-5" *ngIf="building$ | async as building">
-      <div class="row">
-        <div class="col-md-6">
-          <img
-            [src]="building.image_url"
-            alt="Building image"
-            class="img-fluid"
-          />
-        </div>
-        <div class="col-md-6">
-          <h2>{{ building.building_address }}</h2>
-          <p>Contact: {{ building.building_contact_name }}</p>
-          <p>Email: {{ building.building_contact_email }}</p>
-          <p>Square Footage: {{ building.square_footage }}</p>
-        </div>
-      </div>
+   <div class="container mt-5" *ngIf="building$ | async as building">
+  <div class="row">
+    <div class="col-md-6">
+      <img
+        [src]="building.image_url"
+        alt="Building image"
+        class="img-fluid"
+      />
     </div>
+    <div class="col-md-6">
+      <h2>{{ building.building_address }}</h2>
+      <p>Contact: {{ building.building_contact_name }}</p>
+      <p>Email: {{ building.building_contact_email }}</p>
+      <p>Square Footage: {{ building.square_footage }}</p>
+
+      <!-- Buttons -->
+      <!-- <button class="btn btn-primary" (click)="editBuilding(building.id)">Edit</button> -->
+      <button class="btn btn-danger" (click)="this.buildingService.deleteBuilding(building.id)">Delete</button>
+    </div>
+  </div>
+</div>
+
   `,
-  styles: [],
 })
 export class BuildingDetailComponent implements OnInit {
   public building$: Observable<Building> | null = null;
 
   constructor(
     private route: ActivatedRoute,
-    private buildingService: BuildingService
+    public buildingService: BuildingService
   ) {}
 
   ngOnInit(): void {
