@@ -13,9 +13,9 @@ import { FormControl, FormGroup } from '@angular/forms';
        class="text-center" style="margin-top: 20px;">
 
       <!-- <h2>{{ user.name }}</h2> -->
-      <p>First Name: {{user$.first_name}} </p>
-      <p>Last Name: {{user$.last_name}} </p>
-      <p>Email: {{ user$.email }}</p>
+      <h5>First Name: {{user$.first_name}} </h5>
+      <h5>Last Name: {{user$.last_name}} </h5>
+      <h5>Email: {{ user$.email }}</h5>
       <!-- Add more fields as needed -->
 
       <div
