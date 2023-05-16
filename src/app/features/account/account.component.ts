@@ -42,20 +42,20 @@ import { FormControl, FormGroup } from '@angular/forms';
       <form [formGroup]="editFormGroup" (ngSubmit)="onSubmit()">
 
         <p>
-          First Name: <input  type="text" formControlName="first_name" />
+          First Name <input style="border-radius: 7px;" type="text" formControlName="first_name" />
         </p>
 
         <p>
-          Last Name: <input  type="text" formControlName="last_name"/>
+          Last Name <input style="border-radius: 7px;" type="text" formControlName="last_name"/>
         </p>
 
         <p>
-          Email: <input type="text" formControlName="email" >
+          Email <input style="border-radius: 7px;" type="text" formControlName="email" >
         </p>
 
 
-        <button style="margin-right: 45px;" type="submit">Save</button>
-        <button type="button" (click)="cancelEdit()">Cancel</button>
+        <button style="margin-right: 45px; border-radius: 7px; width: 70px; height: 30px; " type="submit">Save</button>
+        <button style="border-radius: 7px; width: 70px; height: 30px;" type="button" (click)="cancelEdit()">Cancel</button>
       </form>
 
     </div>
