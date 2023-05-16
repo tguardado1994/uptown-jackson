@@ -15,7 +15,7 @@ export class BuildingService {
   constructor(private http: HttpClient, private cookieService: CookieService) { }
 
   getBuilding(id: number){
-    return this.http.get<BaseResponse<Building>>(this.BASE_URL + '/buildings/show/' + id)
+    return this.http.get<BaseResponse<Building>>(this.BASE_URL + '/buildings/' + id)
   }
 
   getBuildings(){
