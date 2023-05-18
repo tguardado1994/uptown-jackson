@@ -342,6 +342,8 @@ export interface LandingItems {
   selector: 'app-landing',
   template: `
     <section>
+    <div class="overlay"></div>
+
       <nav class="fixed-top d-flex justify-content-center p-3">
         <div class="d-flex gap-4 text-white">
           <h5
@@ -379,13 +381,11 @@ export interface LandingItems {
           >
             <h2 class="text-white">{{ item.title }}</h2>
             <p class="text-white">{{ item.text }}</p>
-            <button
-              class="btn-arrow d-flex px-3 py-2 btn bg-light gap-2"
-              style="width: fit-content"
-              [routerLink]="item.buttonUrl"
-            >
-              <div>{{ item.buttonText }}</div>
-              <app-arrow-icon></app-arrow-icon>
+            <button [routerLink]="item.buttonUrl" class="learn-more">
+                  <span class="circle" aria-hidden="true">
+                    <span class="icon arrow"></span>
+                  </span>
+                <span class="button-text">{{item.buttonText}}</span>
             </button>
           </div>
         </div>
@@ -394,11 +394,111 @@ export interface LandingItems {
   `,
   styles: [
     `
-      .btn-arrow:hover {
-      }
-      .btn-arrow:hover app-arrow-icon {
-        transform: translateX(0.5rem);
-      }
+    h2{
+      font-size: 4rem;
+    }
+    .overlay {
+    z-index: 2;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgb(70, 69, 69);
+    opacity: 0.17;
+  }
+    button {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  outline: none;
+  border: 0;
+  vertical-align: middle;
+  text-decoration: none;
+  background: transparent;
+  padding: 0;
+  font-size: inherit;
+  font-family: inherit;
+}
+button.learn-more {
+  width: 12rem;
+  height: auto;
+}
+button.learn-more .circle {
+  transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+  position: relative;
+  display: block;
+  margin: 0;
+  width: 3rem;
+  height: 3rem;
+  background: #282936;
+  border-radius: 1.625rem;
+}
+button.learn-more .circle .icon {
+  transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  background: #fff;
+}
+button.learn-more .circle .icon.arrow {
+  transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+  left: 0.625rem;
+  width: 1.125rem;
+  height: 0.125rem;
+  background: none;
+}
+button.learn-more .circle .icon.arrow::before {
+  position: absolute;
+  content: "";
+  top: -0.25rem;
+  right: 0.0625rem;
+  width: 0.625rem;
+  height: 0.625rem;
+  border-top: 0.125rem solid #fff;
+  border-right: 0.125rem solid #fff;
+  transform: rotate(45deg);
+}
+button.learn-more .button-text {
+  transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+  font-size: 16px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 0.75rem 0;
+  margin: 0 0 0 1.85rem;
+  color: #fbfbfd;
+  font-weight: 700;
+  line-height: 1.6;
+  text-align: center;
+  text-transform: uppercase;
+}
+button:hover .circle {
+  width: 100%;
+}
+button:hover .circle .icon.arrow {
+  background: #fff;
+  transform: translate(1rem, 0);
+}
+button:hover .button-text {
+  color: #fff;
+}
+
+@supports (display: grid) {
+  body {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 0.625rem;
+    grid-template-areas: ". main main ." ". main main .";
+  }
+
+  #container {
+    grid-area: main;
+    align-self: center;
+    justify-self: center;
+  }
+}
     `,
   ],
 })
@@ -408,19 +508,19 @@ export class LandingComponent implements OnInit {
       ref: 'welcome',
       title: 'Welcome to Uptown Jackson',
       text: 'Are you interested in buying or listing your business today? Click here to learn more',
-      buttonText: 'Create an Account',
+      buttonText: 'Sign up',
       buttonUrl: 'signup',
       imageUrl:
-        'https://images.pexels.com/photos/11139221/pexels-photo-11139221.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+        '/assets/images/CourtHouse.jpeg',
     },
     {
       ref: 'buy_or_sell',
       title: 'Buy or Sell',
-      text: 'Click here to find businesses located in Uptown Jackson!',
+      text: 'Build your future in Uptown Jackson, today!',
       buttonText: 'Learn More',
       buttonUrl: 'about',
       imageUrl:
-        'https://images.pexels.com/photos/11139221/pexels-photo-11139221.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+        '/assets/images/for_sale.jpeg',
     },
     {
       ref: 'business_directory',
@@ -429,7 +529,7 @@ export class LandingComponent implements OnInit {
       buttonText: 'Explore',
       buttonUrl: 'buildings',
       imageUrl:
-        'https://images.pexels.com/photos/11139221/pexels-photo-11139221.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+        '/assets/images/business.jpeg',
     },
   ];
 
