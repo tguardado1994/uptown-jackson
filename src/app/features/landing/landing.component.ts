@@ -338,49 +338,58 @@ export interface LandingItems {
   buttonUrl: string;
   imageUrl: string;
 }
+
 @Component({
   selector: 'app-landing',
   template: `
     <section>
-      <nav class="fixed-top d-flex justify-content-center p-3">
-        <div class="d-flex gap-4 text-white">
-          <h5
-            role="button"
-            class="underline-hover"
-            (click)="scrollToElement('welcome')"
-          >
+      <nav
+        class="fixed top-4 left-0 right-0 z-50 flex justify-around text-white text-lg max-w-4xl mx-auto"
+      >
+        <h5
+          role="button"
+          class="  cursor-pointer"
+          (click)="scrollToElement('welcome')"
+        >
+          <h2 class="text-4xl font-bold dark:text-white underline-hover">
             Welcome
-          </h5>
-          <h5
-            role="button"
-            class="underline-hover"
-            (click)="scrollToElement('buy_or_sell')"
-          >
+          </h2>
+        </h5>
+        <h5
+          role="button"
+          class="  cursor-pointer"
+          (click)="scrollToElement('buy_or_sell')"
+        >
+          <h2 class="text-4xl font-bold dark:text-white underline-hover">
             Buy or Sell
-          </h5>
-          <h5
-            role="button"
-            class="underline-hover"
-            (click)="scrollToElement('business_directory')"
-          >
-            Business Directory
-          </h5>
-        </div>
+          </h2>
+        </h5>
+        <h5
+          role="button"
+          class=" cursor-pointer"
+          (click)="scrollToElement('business_directory')"
+        >
+          <h2 class="text-4xl font-bold dark:text-white underline-hover">
+            Directory
+          </h2>
+        </h5>
       </nav>
       <ng-container *ngFor="let item of landingItems">
         <div
           [id]="item.ref"
-          class="d-flex justify-content-center align-items-center"
+          class="relative flex justify-center items-center"
           [ngStyle]="{ 'background-image': 'url(' + item.imageUrl + ')' }"
           style="height: 100vh; width: 100%; background-position: center; background-repeat: no-repeat; background-size: cover;"
         >
-          <div
-            class="d-flex flex-column justify-content-center align-items-center"
-          >
-            <h2 class="text-white">{{ item.title }}</h2>
-            <p class="text-white">{{ item.text }}</p>
+          <div class="flex flex-col items-center text-center text-white">
+            <h2 class="text-4xl font-bold mb-2">{{ item.title }}</h2>
+            <p
+              class="mb-4 font-semibold drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]"
+            >
+              {{ item.text }}
+            </p>
             <button
-              class="btn-arrow d-flex px-3 py-2 btn bg-light gap-2"
+              class="btn-arrow flex px-3 py-2 bg-white text-black rounded gap-2 transition-all duration-200 ease-in-out"
               style="width: fit-content"
               [routerLink]="item.buttonUrl"
             >
@@ -395,8 +404,6 @@ export interface LandingItems {
   styles: [
     `
       .btn-arrow:hover {
-      }
-      .btn-arrow:hover app-arrow-icon {
         transform: translateX(0.5rem);
       }
     `,
@@ -411,7 +418,7 @@ export class LandingComponent implements OnInit {
       buttonText: 'Create an Account',
       buttonUrl: 'signup',
       imageUrl:
-        'https://images.pexels.com/photos/11139221/pexels-photo-11139221.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+        'https://live.staticflickr.com/5126/13988740054_a266ccd2ed_b.jpg',
     },
     {
       ref: 'buy_or_sell',
@@ -420,7 +427,7 @@ export class LandingComponent implements OnInit {
       buttonText: 'Learn More',
       buttonUrl: 'about',
       imageUrl:
-        'https://images.pexels.com/photos/11139221/pexels-photo-11139221.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+        'https://upload.wikimedia.org/wikipedia/commons/5/55/Cape_GIrardeau_Co_Jackson_MO_courthouse-20180225-163558.jpg',
     },
     {
       ref: 'business_directory',
@@ -429,7 +436,7 @@ export class LandingComponent implements OnInit {
       buttonText: 'Explore',
       buttonUrl: 'buildings',
       imageUrl:
-        'https://images.pexels.com/photos/11139221/pexels-photo-11139221.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+        'https://cloudfront-us-east-1.images.arcpublishing.com/gray/GGZSPH6CCNEODKISOY2WG2BKQE.jpg',
     },
   ];
 

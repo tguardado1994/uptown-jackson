@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LoginComponent } from './auth/login.component';
-import { SignupComponent } from './auth/signup.component';
+import { LoginComponent } from './features/auth/login.component';
+import { SignupComponent } from './features/auth/signup.component';
 import { BuildingCreateFormComponent } from './features/buildings/building-create-form.component';
 import { BuildingEditFormComponent } from './features/buildings/building-edit-form.component';
 import { BuildingsComponent } from './features/buildings/buildings.component';
@@ -15,7 +15,7 @@ const routes: Routes = [
   {
     path: '',
     component: LandingComponent,
-    canActivate: [AuthRedirect]
+    canActivate: [AuthRedirect],
   },
   {
     path: 'login',

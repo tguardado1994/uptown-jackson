@@ -4,8 +4,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { SignupComponent } from './auth/signup.component';
-import { LoginComponent } from './auth/login.component';
+import { SignupComponent } from './features/auth/signup.component';
+import { LoginComponent } from './features/auth/login.component';
 import { HttpClientModule } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
 import { ToastComponent } from './shared/components/ui/toast.component';
@@ -18,7 +18,18 @@ import { BuildingDetailComponent } from './features/buildings/building-detail.co
 import { LandingComponent } from './features/landing/landing.component';
 import { AccountComponent } from './features/account/account.component';
 import { ArrowIconComponent } from './shared/components/icons/arrow-icon.component';
-
+import { LoadingIconComponent } from './shared/components/icons/loading-icon.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CloseIconComponent } from './shared/components/icons/close-icon.component';
+import { EmailIconComponent } from './shared/components/icons/email-icon.component';
+import { LockIconComponent } from './shared/components/icons/lock-icon.component';
+import { CheckShieldIconComponent } from './shared/components/icons/check-shield-icon.component';
+import { CheckIconComponent } from './shared/components/icons/check-icon.component';
+import { FailCheckIconComponent } from './shared/components/icons/fail-check-icon.component';
+import { FooterComponent } from './features/footer/footer.component';
+import { PencilIconComponent } from './shared/components/icons/pencil-icon.component';
+import { PhoneIconComponent } from './shared/components/icons/phone-icon.component';
+import { ClipboardIconComponent } from './shared/components/icons/clipboard-icon.component';
 
 @NgModule({
   declarations: [
@@ -34,16 +45,28 @@ import { ArrowIconComponent } from './shared/components/icons/arrow-icon.compone
     BuildingDetailComponent,
     LandingComponent,
     AccountComponent,
-    ArrowIconComponent
+    ArrowIconComponent,
+    LoadingIconComponent,
+    CloseIconComponent,
+    EmailIconComponent,
+    LockIconComponent,
+    CheckShieldIconComponent,
+    CheckIconComponent,
+    FailCheckIconComponent,
+    FooterComponent,
+    PencilIconComponent,
+    PhoneIconComponent,
+    ClipboardIconComponent,
   ],
 
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-     HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule,
   ],
   providers: [CookieService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

@@ -1,79 +1,105 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { shareReplay } from 'rxjs';
+import { AnimationsModule } from '../../modules/animations.module';
 
 @Component({
   selector: 'app-nav',
   template: `
-    <nav class="navbar navbar-expand-lg navbar-light bg-green">
-      <div class="container-fluid">
-        <a class="navbar-brand text-white underline-hover" routerLink="/"
-          >Uptown Jackson</a
+    <nav class="flex justify-between flex-wrap bg-green-600 p-6 shadow-xl">
+      <div class="flex items-center flex-shrink-0 text-white mr-6">
+        <a
+          class="font-semibold text-xl tracking-tight underline-hover cursor-pointer"
+          routerLink="/"
         >
+          <h3 class="sm:text-3xl text-xl font-semibold dark:text-white">
+            Uptown Jackson
+          </h3>
+        </a>
+      </div>
+      <div class="block lg:hidden">
         <button
-          class="navbar-toggler text-white"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarNav"
-          aria-controls="navbarNav"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
+          class="flex items-center px-3 py-2 border rounded text-white border-white hover:text-white hover:border-white"
+          (click)="toggleNavbar()"
         >
-          <span class="navbar-toggler-icon text-white"></span>
+          <svg
+            class="fill-current h-3 w-3"
+            viewBox="0 0 20 20"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <title>Menu</title>
+            <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
+          </svg>
         </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav ms-auto">
-            <ng-container *ngIf="user$ | async as user; else showAuthLinks">
-              <li class="nav-item">
-                <a
-                  class="nav-link text-white underline-hover"
-                  routerLink="account"
-                  >Account</a
-                >
-              </li>
-              <li class="nav-item">
-                <a
-                  class="nav-link text-white underline-hover"
-                  (click)="userService.logout()"
-                  style="cursor: pointer;"
-                  >Logout</a
-                >
-              </li>
-            </ng-container>
-            <ng-template #showAuthLinks>
-              <li class="nav-item">
-                <a
-                  class="nav-link text-white underline-hover"
-                  aria-current="page"
-                  routerLink="login"
-                  >Login</a
-                >
-              </li>
-              <li class="nav-item">
-                <a
-                  class="nav-link text-white underline-hover"
-                  routerLink="signup"
-                  >Create Account</a
-                >
-              </li>
-            </ng-template>
-
-            <li class="nav-item">
-              <a
-                class="nav-link text-white underline-hover"
-                routerLink="buildings"
-                >Buildings</a
-              >
-            </li>
-          </ul>
+      </div>
+      <div class="flex-grow lg:block hidden"></div>
+      <div
+        [ngClass]="isNavbarOpen ? 'block' : 'hidden'"
+        class="w-full block lg:flex lg:items-center lg:w-auto"
+        *ngIf="!(loading$ | async)"
+        [@fade]
+      >
+        <div class="text-sm lg:flex-grow">
+          <ng-container *ngIf="user$ | async as user; else showAuthLinks">
+            <a
+              class="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-white mr-4 underline-hover cursor-pointer"
+              routerLink="account"
+            >
+              <h4 class="sm:text-2xl text-lg font-semibold dark:text-white">
+                Account
+              </h4>
+            </a>
+            <a
+              class="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-white mr-4 underline-hover cursor-pointer"
+              (click)="userService.logout()"
+            >
+              <h4 class="sm:text-2xl text-lg font-semibold dark:text-white">
+                Logout
+              </h4>
+            </a>
+          </ng-container>
+          <ng-template #showAuthLinks>
+            <a
+              class="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-white mr-6 underline-hover cursor-pointer"
+              routerLink="login"
+            >
+              <h4 class="sm:text-2xl text-lg font-semibold dark:text-white">
+                Login
+              </h4>
+            </a>
+            <a
+              class="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-white mr-6 underline-hover cursor-pointer"
+              routerLink="signup"
+            >
+              <h4 class="sm:text-2xl text-lg font-semibold dark:text-white">
+                Create Account
+              </h4>
+            </a>
+          </ng-template>
+          <a
+            class="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-white mr-6 underline-hover cursor-pointer"
+            routerLink="buildings"
+          >
+            <h4 class="sm:text-2xl text-lg font-semibold dark:text-white">
+              Buildings
+            </h4>
+          </a>
         </div>
       </div>
     </nav>
   `,
+  animations: [AnimationsModule.fade],
 })
 export class NavComponent implements OnInit {
   public user$ = this.userService.user.pipe(shareReplay(1));
+  public loading$ = this.userService.loading.pipe(shareReplay(1));
+  public isNavbarOpen = false;
+
   constructor(public userService: UserService) {}
+
+  toggleNavbar() {
+    this.isNavbarOpen = !this.isNavbarOpen;
+  }
 
   ngOnInit(): void {}
 }
