@@ -9,8 +9,8 @@ import { AnimationsModule } from '../../modules/animations.module';
       [@fadeInOut]
       class="px-3 py-4 rounded-lg shadow-lg transition ease-in-out duration-500 z-50"
       [ngClass]="{
-        'bg-green-500': type === 'success',
-        'bg-red-500': type === 'error'
+        'bg-green-600': type === 'success',
+        'bg-red-600': type === 'error'
       }"
     >
       <div class="flex justify-between">

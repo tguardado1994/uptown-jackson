@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { shareReplay } from 'rxjs';
+import { AnimationsModule } from '../../modules/animations.module';
 
 @Component({
   selector: 'app-nav',
@@ -35,6 +36,8 @@ import { shareReplay } from 'rxjs';
       <div
         [ngClass]="isNavbarOpen ? 'block' : 'hidden'"
         class="w-full block lg:flex lg:items-center lg:w-auto"
+        *ngIf="!(loading$ | async)"
+        [@fade]
       >
         <div class="text-sm lg:flex-grow">
           <ng-container *ngIf="user$ | async as user; else showAuthLinks">
@@ -85,9 +88,11 @@ import { shareReplay } from 'rxjs';
       </div>
     </nav>
   `,
+  animations: [AnimationsModule.fade],
 })
 export class NavComponent implements OnInit {
   public user$ = this.userService.user.pipe(shareReplay(1));
+  public loading$ = this.userService.loading.pipe(shareReplay(1));
   public isNavbarOpen = false;
 
   constructor(public userService: UserService) {}

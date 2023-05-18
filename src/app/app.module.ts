@@ -27,6 +27,9 @@ import { CheckShieldIconComponent } from './shared/components/icons/check-shield
 import { CheckIconComponent } from './shared/components/icons/check-icon.component';
 import { FailCheckIconComponent } from './shared/components/icons/fail-check-icon.component';
 import { FooterComponent } from './features/footer/footer.component';
+import { PencilIconComponent } from './shared/components/icons/pencil-icon.component';
+import { PhoneIconComponent } from './shared/components/icons/phone-icon.component';
+import { ClipboardIconComponent } from './shared/components/icons/clipboard-icon.component';
 
 @NgModule({
   declarations: [
@@ -51,6 +54,9 @@ import { FooterComponent } from './features/footer/footer.component';
     CheckIconComponent,
     FailCheckIconComponent,
     FooterComponent,
+    PencilIconComponent,
+    PhoneIconComponent,
+    ClipboardIconComponent,
   ],
 
   imports: [
