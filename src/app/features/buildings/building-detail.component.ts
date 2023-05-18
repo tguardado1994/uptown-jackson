@@ -8,7 +8,7 @@ import { BuildingService } from 'src/app/shared/services/building.service';
 @Component({
   selector: 'app-building-detail',
   template: `
-   <div class="container mt-5" *ngIf="building$ | async as building">
+   <div class="container mt-5"  *ngIf="building$ | async as building">
   <div class="row">
     <div class="col-md-6">
       <img
