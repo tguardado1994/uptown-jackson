@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-arrow-icon',
+  selector: 'app-fail-check-icon',
   template: `
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -9,25 +9,18 @@ import { Component, OnInit } from '@angular/core';
       viewBox="0 0 24 24"
       stroke-width="1.5"
       stroke="currentColor"
-      class="h-6 w-6"
+      class="w-6 h-6"
     >
       <path
         stroke-linecap="round"
         stroke-linejoin="round"
-        d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"
+        d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
       />
     </svg>
   `,
-  styles: [
-    `
-      :host {
-        display: inline-flex;
-        transition: transform 0.3s ease;
-      }
-    `,
-  ],
+  styles: [],
 })
-export class ArrowIconComponent implements OnInit {
+export class FailCheckIconComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {}

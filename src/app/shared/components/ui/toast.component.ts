@@ -1,67 +1,42 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { AnimationsModule } from '../../modules/animations.module';
 
 @Component({
   selector: 'app-toast',
   template: `
     <div
-      class="toast"
+      *ngIf="showToast"
+      [@fadeInOut]
+      class="px-3 py-4 rounded-lg shadow-lg transition ease-in-out duration-500 z-50"
       [ngClass]="{
-        show: showToast,
-        'bg-success': type === 'success',
-        'bg-danger': type === 'error'
+        'bg-green-500': type === 'success',
+        'bg-red-500': type === 'error'
       }"
-      role="alert"
-      aria-live="assertive"
-      aria-atomic="true"
     >
-      <div class="toast-body d-flex justify-content-between">
-        <div class="text-white">
+      <div class="flex justify-between">
+        <div class="text-white text-base font-medium">
           {{ toastMessage }}
         </div>
         <button
           type="button"
-          class="btn-close btn-close-white"
-          data-bs-dismiss="toast"
-          aria-label="Close"
-          (click)="closeToast()"
-        ></button>
+          class="text-white text-lg font-semibold focus:outline-none rounded-lg hover:ring-2 hover:ring-white hover:ring-opacity-50 ml-2 transition-all ease-in-out duration-200"
+          (click)="this.showToast = false"
+        >
+          <app-close-icon></app-close-icon>
+        </button>
       </div>
     </div>
   `,
-  styles: [
-    `
-      .toast {
-        position: absolute;
-        bottom: 1rem;
-        right: 1rem;
-        opacity: 0;
-        transition: opacity 0.3s ease-in-out;
-      }
-      .toast.show {
-        opacity: 1;
-      }
-      .toast-body {
-        padding: 1rem;
-        font-size: 1.25rem; /* Adjust this as per your requirement */
-      }
-      .btn-close-white::after, .btn-close-white::before {
-        background-color: white;
-      }
-    `,
-  ],
+  animations: [AnimationsModule.fadeInOut],
 })
 export class ToastComponent implements OnInit {
   @Input() toastMessage: string = '';
   @Input() type: 'success' | 'error' | null = null;
   public showToast: boolean = true;
 
-  closeToast() {
-    this.showToast = false;
-  }
-
   ngOnInit() {
     setTimeout(() => {
-      this.closeToast();
-    }, 2000);
+      this.showToast = false;
+    }, 4000);
   }
 }

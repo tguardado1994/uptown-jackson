@@ -1,34 +1,47 @@
-import { Component, Input, TemplateRef } from '@angular/core';
+import {
+  Component,
+  Input,
+  Output,
+  EventEmitter,
+  TemplateRef,
+} from '@angular/core';
+import { AnimationsModule } from '../../modules/animations.module';
 
 @Component({
   selector: 'app-button',
   template: `
     <button
+      (click)="this.onClick.emit()"
       [disabled]="isLoading"
       [type]="buttonType"
-      class="btn bg-green"
+      class="text-white bg-green-600 hover:bg-green-800 transition duration-300 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium text-sm text-center dark:bg-green-500 dark:hover:bg-green-700 dark:focus:ring-green-400"
       [ngClass]="styles"
       [ngSwitch]="isLoading"
     >
       <ng-container *ngSwitchDefault>
-        <div class="d-flex justify-content-center align-items-center">
-          <p class="mb-0 text-white">{{ buttonText }}</p>
+        <div [@fade] class="flex justify-center items-center">
+          <p class="text-sm">{{ buttonText }}</p>
           <div *ngIf="icon" [ngClass]="iconStyles">
             <ng-container [ngTemplateOutlet]="icon"></ng-container>
           </div>
         </div>
       </ng-container>
-      <div class="spinner-border spinner-border-sm mx-3" role="status" *ngSwitchCase="true">
-        <span class="visually-hidden">Loading...</span>
-      </div>
+      <app-loading-icon
+        [@fade]
+        *ngSwitchCase="true"
+        styles="h-5 w-5"
+      ></app-loading-icon>
     </button>
   `,
+  animations: [AnimationsModule.fade],
 })
 export class ButtonComponent {
-  @Input() buttonText: string = '';
-  @Input() buttonType: string = 'button';
   @Input() isLoading: boolean = false;
-  @Input() styles: string = 'false';
+  @Input() buttonText: string = '';
+  @Input() buttonType: 'button' | 'submit' = 'button';
   @Input() icon: TemplateRef<SVGElement> | null = null;
   @Input() iconStyles: string = '';
+  @Input() styles: string = '';
+
+  @Output() onClick = new EventEmitter<void>();
 }

@@ -1,17 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 html {
-    scroll-behavior: smooth;
-}
-
-.bg-green {
-  background-color: #80AC99;
-}
-
-button.bg-green:hover {
-  background-color: #698378;
-}
-
-.green {
-  color: #80AC99;
+  scroll-behavior: smooth;
 }
 
 .underline-hover {
@@ -19,7 +11,7 @@ button.bg-green:hover {
   text-decoration: none;
 }
 .underline-hover::after {
-  content: '';
+  content: "";
   position: absolute;
   width: 0;
   height: 2px;

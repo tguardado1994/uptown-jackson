@@ -1,5 +1,17 @@
-<app-nav *ngIf="showNavbar"></app-nav>
-<router-outlet></router-outlet>
-<ng-container *ngFor="let toast of toastService.toasts$ | async">
-  <app-toast [toastMessage]="toast.message" [type]="toast.type"></app-toast>
-</ng-container>
+<main class="bg-gray-50 flex flex-col min-h-screen">
+  <app-nav *ngIf="showNavbar"></app-nav>
+  <div class="flex-grow">
+    <router-outlet></router-outlet>
+  </div>
+  <app-footer></app-footer>
+  <ng-container *ngIf="toastService.toasts$ | async as toasts">
+    <div class="fixed bottom-4 right-4 flex flex-col-reverse">
+      <app-toast
+        *ngFor="let toast of toasts; let i = index"
+        [toastMessage]="toast.message"
+        [type]="toast.type"
+        class="my-2"
+      ></app-toast>
+    </div>
+  </ng-container>
+</main>
