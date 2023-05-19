@@ -56,25 +56,25 @@ import { UserService } from 'src/app/shared/services/user.service';
 <nav aria-label="Page navigation example">
   <ul class="inline-flex -space-x-px">
     <li >
-      <a href="#" class="px-3 py-2 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Previous</a>
+      <a  class="px-3 py-2 ml-0 leading-tight text-white bg-green-300 border border-green-500 rounded-l-lg hover:bg-green-400 hover:text-white-800 dark:bg-green-800 dark:border-green-700 dark:text-white-400 dark:hover:bg-green-700 dark:hover:text-gray-100">Previous</a>
     </li>
     <li >
-      <a href="#" class="px-3 py-2 text-white border border-gray-300 bg-blue-600 hover:bg-blue-100 hover:text-blue-700 dark:border-gray-700 dark:bg-gray-700">1</a>
+      <a  class="px-3 py-2 text-white border border-green-300 bg-green-600 hover:bg-green-500 hover:text-white-700 dark:border-green-700 dark:bg-green-700">1</a>
     </li>
     <li *ngIf="currentPage > 1">
-      <a href="#" class="px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">2</a>
+      <a  class="px-3 py-2 leading-tight text-white bg-green-300 border border-green-500 rounded-l-lg hover:bg-green-400 hover:text-white-800 dark:bg-green-800 dark:border-green-700 dark:text-green-400 dark:hover:bg-green-700 dark:hover:text-gray-100">2</a>
     </li>
     <li *ngIf="currentPage > 2 ">
-      <a href="#" aria-current="page" class="px-3 py-2 text-blue-600 border border-gray-300 bg-blue-50 hover:bg-blue-100 hover:text-blue-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white">3</a>
+      <a  aria-current="page" class="px-3 py-2 text-white border border-green-300 bg-green-600 hover:bg-green-100 hover:text-white-700 dark:border-green-700 dark:bg-green-700">3</a>
     </li>
     <li *ngIf="currentPage < totalPages">
-      <a href="#" class="px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">4</a>
+      <a  class="px-3 py-2 leading-tight text-white bg-green-300 border border-green-500 rounded-l-lg hover:bg-green-400 hover:text-white-800 dark:bg-green-800 dark:border-green-700 dark:text-white-400 dark:hover:bg-green-700 dark:hover:text-gray-100">4</a>
     </li>
     <li *ngIf="currentPage < totalPages - 1">
-      <a href="#" class="px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">5</a>
+      <a  class="px-3 py-2 leading-tight text-white bg-green-300 border border-green-500 rounded-l-lg hover:bg-green-400 hover:text-white-800 dark:bg-green-800 dark:border-green-700 dark:text-white-400 dark:hover:bg-green-700 dark:hover:text-gray-100">5</a>
     </li>
     <li>
-      <a href="#" class="px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white" (click)="nextPage()">Next</a>
+      <a  class="px-3 py-2 leading-tight text-white bg-green border border-green-300 rounded-r-lg hover:bg-green-100 hover:text-white dark:bg-green-800 dark:border-green-700 dark:text-white dark:hover:bg-green-700 dark:hover:text-white" (click)="nextPage()">Next</a>
     </li>
   </ul>
 </nav>
