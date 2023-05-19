@@ -351,7 +351,9 @@ export interface LandingItems {
           class="  cursor-pointer"
           (click)="scrollToElement('welcome')"
         >
-          <h2 class="text-4xl font-bold dark:text-white underline-hover">
+          <h2
+            class="text-4xl font-bold dark:text-white underline-hover drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]"
+          >
             Welcome
           </h2>
         </h5>
@@ -360,7 +362,9 @@ export interface LandingItems {
           class="  cursor-pointer"
           (click)="scrollToElement('buy_or_sell')"
         >
-          <h2 class="text-4xl font-bold dark:text-white underline-hover">
+          <h2
+            class="text-4xl font-bold dark:text-white underline-hover drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]"
+          >
             Buy or Sell
           </h2>
         </h5>
@@ -369,7 +373,9 @@ export interface LandingItems {
           class=" cursor-pointer"
           (click)="scrollToElement('business_directory')"
         >
-          <h2 class="text-4xl font-bold dark:text-white underline-hover">
+          <h2
+            class="text-4xl font-bold dark:text-white underline-hover drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]"
+          >
             Directory
           </h2>
         </h5>
@@ -381,20 +387,25 @@ export interface LandingItems {
           [ngStyle]="{ 'background-image': 'url(' + item.imageUrl + ')' }"
           style="height: 100vh; width: 100%; background-position: center; background-repeat: no-repeat; background-size: cover;"
         >
-          <div class="flex flex-col items-center text-center text-white">
-            <h2 class="text-4xl font-bold mb-2">{{ item.title }}</h2>
+          <div class="flex flex-col items-center text-center text-white gap-4">
+            <h2
+              class="text-7xl font-bold mb-4 drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]"
+            >
+              {{ item.title }}
+            </h2>
             <p
-              class="mb-4 font-semibold drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]"
+              class="mb-4 text-3xl font-semibold drop-shadow-[0_1.9px_1.9px_rgba(0,0,0,2)]"
             >
               {{ item.text }}
             </p>
-            <button
-              class="btn-arrow flex px-3 py-2 bg-white text-black rounded gap-2 transition-all duration-200 ease-in-out"
-              style="width: fit-content"
-              [routerLink]="item.buttonUrl"
-            >
-              <div>{{ item.buttonText }}</div>
-              <app-arrow-icon></app-arrow-icon>
+            <button [routerLink]="item.buttonUrl" class="learn-more">
+              <span class="circle" aria-hidden="true">
+                <span class="icon arrow"></span>
+              </span>
+              <span
+                class="button-text drop-shadow-[0_1.9px_1.9px_rgba(0,0,0,1.2)]  text-white"
+                >{{ item.buttonText }}
+              </span>
             </button>
           </div>
         </div>
@@ -403,8 +414,96 @@ export interface LandingItems {
   `,
   styles: [
     `
-      .btn-arrow:hover {
-        transform: translateX(0.5rem);
+      button {
+        position: relative;
+        display: inline-block;
+        cursor: pointer;
+        outline: none;
+        border: 0;
+        vertical-align: middle;
+        text-decoration: none;
+        background: transparent;
+        padding: 0;
+        font-size: inherit;
+        font-family: inherit;
+      }
+      button.learn-more {
+        width: 12rem;
+        height: auto;
+      }
+      button.learn-more .circle {
+        transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+        position: relative;
+        display: block;
+        margin: 0;
+        width: 3rem;
+        height: 3rem;
+        background: #282936;
+        border-radius: 1.625rem;
+      }
+      button.learn-more .circle .icon {
+        transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        margin: auto;
+        background: #fff;
+      }
+      button.learn-more .circle .icon.arrow {
+        transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+        left: 0.625rem;
+        width: 1.125rem;
+        height: 0.125rem;
+        background: none;
+      }
+      button.learn-more .circle .icon.arrow::before {
+        position: absolute;
+        content: '';
+        top: -0.25rem;
+        right: 0.0625rem;
+        width: 0.625rem;
+        height: 0.625rem;
+        border-top: 0.125rem solid #fff;
+        border-right: 0.125rem solid #fff;
+        transform: rotate(45deg);
+      }
+      button.learn-more .button-text {
+        transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+        font-size: 16px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        padding: 0.75rem 0;
+        margin: 0 0 0 1.85rem;
+        color: white;
+        font-weight: 700;
+        line-height: 1.6;
+        text-align: center;
+        text-transform: uppercase;
+      }
+      button:hover .circle {
+        width: 100%;
+      }
+      button:hover .circle .icon.arrow {
+        background: #fff;
+        transform: translate(1rem, 0);
+      }
+
+      @supports (display: grid) {
+        body {
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          grid-gap: 0.625rem;
+          grid-template-areas: '. main main .' '. main main .';
+        }
+
+        #container {
+          grid-area: main;
+          align-self: center;
+          justify-self: center;
+        }
       }
     `,
   ],
@@ -414,20 +513,18 @@ export class LandingComponent implements OnInit {
     {
       ref: 'welcome',
       title: 'Welcome to Uptown Jackson',
-      text: 'Are you interested in buying or listing your business today? Click here to learn more',
-      buttonText: 'Create an Account',
+      text: 'Are you interested in buying or listing your business? Click here to get started!',
+      buttonText: 'Get Started',
       buttonUrl: 'signup',
-      imageUrl:
-        'https://live.staticflickr.com/5126/13988740054_a266ccd2ed_b.jpg',
+      imageUrl: '/assets/courtHouse.jpeg',
     },
     {
       ref: 'buy_or_sell',
       title: 'Buy or Sell',
       text: 'Click here to find businesses located in Uptown Jackson!',
-      buttonText: 'Learn More',
+      buttonText: 'Listings',
       buttonUrl: 'about',
-      imageUrl:
-        'https://upload.wikimedia.org/wikipedia/commons/5/55/Cape_GIrardeau_Co_Jackson_MO_courthouse-20180225-163558.jpg',
+      imageUrl: '/assets/forSale.jpeg',
     },
     {
       ref: 'business_directory',
@@ -435,8 +532,7 @@ export class LandingComponent implements OnInit {
       text: '',
       buttonText: 'Explore',
       buttonUrl: 'buildings',
-      imageUrl:
-        'https://cloudfront-us-east-1.images.arcpublishing.com/gray/GGZSPH6CCNEODKISOY2WG2BKQE.jpg',
+      imageUrl: '/assets/businessDirectory.jpeg',
     },
   ];
 

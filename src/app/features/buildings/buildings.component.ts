@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
-import { map, tap } from 'rxjs';
+import { Observable, map, tap } from 'rxjs';
 import { BuildingService } from 'src/app/shared/services/building.service';
 import { UserService } from 'src/app/shared/services/user.service';
+
+
 
 @Component({
   selector: 'app-buildings',
@@ -48,16 +50,58 @@ import { UserService } from 'src/app/shared/services/user.service';
           </div>
         </div>
       </div>
-    </div>
+
+<!-- Pagination -->
+
+<nav aria-label="Page navigation example">
+  <ul class="inline-flex -space-x-px">
+    <li >
+      <a  class="px-3 py-2 ml-0 leading-tight text-white bg-green-300 border border-green-500 rounded-l-lg hover:bg-green-400 hover:text-white-800 dark:bg-green-800 dark:border-green-700 dark:text-white-400 dark:hover:bg-green-700 dark:hover:text-gray-100">Previous</a>
+    </li>
+    <li >
+      <a  class="px-3 py-2 text-white border border-green-300 bg-green-600 hover:bg-green-500 hover:text-white-700 dark:border-green-700 dark:bg-green-700">1</a>
+    </li>
+    <li *ngIf="currentPage > 1">
+      <a  class="px-3 py-2 leading-tight text-white bg-green-300 border border-green-500 rounded-l-lg hover:bg-green-400 hover:text-white-800 dark:bg-green-800 dark:border-green-700 dark:text-green-400 dark:hover:bg-green-700 dark:hover:text-gray-100">2</a>
+    </li>
+    <li *ngIf="currentPage > 2 ">
+      <a  aria-current="page" class="px-3 py-2 text-white border border-green-300 bg-green-600 hover:bg-green-100 hover:text-white-700 dark:border-green-700 dark:bg-green-700">3</a>
+    </li>
+    <li *ngIf="currentPage < totalPages">
+      <a  class="px-3 py-2 leading-tight text-white bg-green-300 border border-green-500 rounded-l-lg hover:bg-green-400 hover:text-white-800 dark:bg-green-800 dark:border-green-700 dark:text-white-400 dark:hover:bg-green-700 dark:hover:text-gray-100">4</a>
+    </li>
+    <li *ngIf="currentPage < totalPages - 1">
+      <a  class="px-3 py-2 leading-tight text-white bg-green-300 border border-green-500 rounded-l-lg hover:bg-green-400 hover:text-white-800 dark:bg-green-800 dark:border-green-700 dark:text-white-400 dark:hover:bg-green-700 dark:hover:text-gray-100">5</a>
+    </li>
+    <li>
+      <a  class="px-3 py-2 leading-tight text-white bg-green border border-green-300 rounded-r-lg hover:bg-green-100 hover:text-white dark:bg-green-800 dark:border-green-700 dark:text-white dark:hover:bg-green-700 dark:hover:text-white" (click)="nextPage()">Next</a>
+    </li>
+  </ul>
+</nav>
+
+
   `,
 })
 export class BuildingsComponent {
+
+  public currentPage = 1;
+  public totalPages = 0;
+
   public buildings$ = this.buildingsService.getBuildings().pipe(
     tap((data) => console.log(data)),
     map((data: any) => data.data.buildings)
-  );
+  )
+
   constructor(
     private buildingsService: BuildingService,
     public userService: UserService
   ) {}
+
+  public nextPage(): void {
+    if (this.currentPage < this.totalPages) {
+      this.currentPage++;
+    }
+}
+
+
 }

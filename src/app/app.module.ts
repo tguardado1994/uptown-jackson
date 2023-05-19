@@ -31,6 +31,7 @@ import { PencilIconComponent } from './shared/components/icons/pencil-icon.compo
 import { PhoneIconComponent } from './shared/components/icons/phone-icon.component';
 import { ClipboardIconComponent } from './shared/components/icons/clipboard-icon.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -57,6 +58,7 @@ import { ClipboardIconComponent } from './shared/components/icons/clipboard-icon
     PencilIconComponent,
     PhoneIconComponent,
     ClipboardIconComponent,
+
   ],
 
   imports: [
