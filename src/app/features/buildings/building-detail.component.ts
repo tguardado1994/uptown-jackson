@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map, switchMap, tap } from 'rxjs/operators';
 import { Building } from 'src/app/shared/interfaces/building';
 import { BuildingService } from 'src/app/shared/services/building.service';
+
 
 @Component({
   selector: 'app-building-detail',
@@ -24,8 +25,8 @@ import { BuildingService } from 'src/app/shared/services/building.service';
       <p>Square Footage: {{ building.square_footage }}</p>
 
       <!-- Buttons -->
-      <!-- <button class="btn btn-primary" (click)="editBuilding(building.id)">Edit</button> -->
-      <button class="btn btn-danger" (click)="this.buildingService.deleteBuilding(building.id)">Delete</button>
+      <!-- <button class="btn btn-primary" (click)="editBuilding(building.id)">Edit</button>
+      <button class="btn btn-danger" (click)="this.buildingService.deleteBuilding(building.id)">Delete</button>-->
     </div>
   </div>
 </div>
@@ -37,7 +38,8 @@ export class BuildingDetailComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    public buildingService: BuildingService
+    public buildingService: BuildingService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -48,5 +50,10 @@ export class BuildingDetailComponent implements OnInit {
           .pipe(map((res) => res.data))
       )
     );
+  }
+
+  editBuilding(id: number) {
+    // Logic to navigate to the edit page for the building
+    this.router.navigate(['/buildings/edit', id]);
   }
 }

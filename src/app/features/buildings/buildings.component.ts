@@ -54,23 +54,23 @@ import { Building } from 'src/app/shared/interfaces/building';
 
       <!-- Pagination -->
 
-<nav aria-label="Page navigation example">
-  <ul class="inline-flex -space-x-px">
+<nav aria-label="Page navigation example" class="flex justify-center">
+  <ul class="inline-flex">
     <li>
       <a
-        class="px-3 py-2 ml-0 leading-tight text-white bg-green-300 border border-green-500 rounded-l-lg hover:bg-green-400 hover:text-white-800 dark:bg-green-800 dark:border-green-700 dark:text-white-400 dark:hover:bg-green-700 dark:hover:text-gray-100"
+        class="px-3 py-2 ml-0 leading-tight text-white bg-green-300 border border-green-500 rounded-l-lg hover:bg-green-400 hover:text-white-800 dark:bg-green-800 dark:border-green-700 dark:text-white-400 dark:hover:bg-green-700 dark:hover:text-gray-100 cursor-pointer"
         (click)="previousPage()"
       >Previous</a>
     </li>
     <li>
-      <a
-        class="px-3 py-2 text-white border border-green-300 bg-green-600 hover:bg-green-500 hover:text-white-700 dark:border-green-700 dark:bg-green-700"
+      <a *ngIf="currentPage <= totalPages"
+        class="px-3 py-2 text-white border border-green-300 bg-green-600 hover:bg-green-500 hover:text-white-700 dark:border-green-700 dark:bg-green-700 cursor-pointer"
       >{{ currentPage }}</a>
     </li>
 
     <li>
-      <a
-        class="px-3 py-2 leading-tight text-white bg-green-300 border border-green-300 rounded-r-lg hover:bg-green-400 hover:text-white-800 dark:bg-green-800 dark:border-green-700 dark:text-white dark:hover:bg-green-700 dark:hover:text-white"
+      <a *ngIf="currentPage < totalPages"
+        class="px-3 py-2 leading-tight text-white bg-green-300 border border-green-300 rounded-r-lg hover:bg-green-400 hover:text-white-800 dark:bg-green-800 dark:border-green-700 dark:text-white dark:hover:bg-green-700 dark:hover:text-white cursor-pointer"
         (click)="nextPage()"
       >Next</a>
     </li>
