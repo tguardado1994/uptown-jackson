@@ -19,9 +19,9 @@ export class BuildingService {
     );
   }
 
-  getBuildings() {
+  getBuildings(page: number) {
     return this.http.get<BaseResponse<Building[]>>(
-      this.BASE_URL + '/buildings/index'
+      this.BASE_URL + `/buildings/index?page=${page}`
     );
   }
 
