@@ -144,6 +144,7 @@ export class LoginComponent implements OnDestroy {
             this.router.navigate(['/buildings']);
           },
           error: (err) => {
+            this.loading = false;
             const errors = err.error.error_description;
             errors.forEach((message: string) => {
               this.toastService.showToast({
@@ -151,7 +152,6 @@ export class LoginComponent implements OnDestroy {
                 message,
               });
             });
-            this.loading = false;
           },
           complete: () => (this.loading = false),
         })

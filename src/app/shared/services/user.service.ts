@@ -97,6 +97,7 @@ export class UserService {
             if (err.status === 401) {
               return this.refreshToken().pipe(
                 switchMap((res) => {
+                  console.log(res);
                   this.setUser(res);
                   return of(this.autoLogin());
                 })
