@@ -58,6 +58,7 @@ import { ClipboardIconComponent } from './shared/components/icons/clipboard-icon
     PencilIconComponent,
     PhoneIconComponent,
     ClipboardIconComponent,
+  
 
   ],
 
