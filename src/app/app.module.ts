@@ -32,6 +32,10 @@ import { PhoneIconComponent } from './shared/components/icons/phone-icon.compone
 import { ClipboardIconComponent } from './shared/components/icons/clipboard-icon.component';
 import { AboutUsComponent } from './about-us/about-us.component';
 
+import { PlusIconComponent } from './shared/components/icons/plus-icon.component';
+import { ModalComponent } from './shared/components/ui/modal.component';
+import { BuildingCardComponent } from './features/buildings/building-card.component';
+import { PlaceholderIconComponent } from './shared/components/icons/placeholder-icon.component';
 
 @NgModule({
   declarations: [
@@ -61,6 +65,10 @@ import { AboutUsComponent } from './about-us/about-us.component';
     ClipboardIconComponent,
     AboutUsComponent,
 
+    PlusIconComponent,
+    ModalComponent,
+    BuildingCardComponent,
+    PlaceholderIconComponent,
   ],
 
   imports: [

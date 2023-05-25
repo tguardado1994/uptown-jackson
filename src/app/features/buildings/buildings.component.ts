@@ -1,107 +1,142 @@
-import { Component } from '@angular/core';
-import { Observable, map, tap } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
+import {
+  Observable,
+  delay,
+  map,
+  of,
+  race,
+  shareReplay,
+  startWith,
+  switchMap,
+  take,
+} from 'rxjs';
 import { BuildingService } from 'src/app/shared/services/building.service';
 import { UserService } from 'src/app/shared/services/user.service';
-
-
+import { ActivatedRoute, Router } from '@angular/router';
+import { Building } from 'src/app/shared/interfaces/building';
+import { AnimationsModule } from 'src/app/shared/modules/animations.module';
 
 @Component({
   selector: 'app-buildings',
   template: `
-    <div class="container mx-auto px-4 mt-8">
-      <div
-        class="md:flex md:justify-start my-3"
-        *ngIf="userService.user | async"
-      >
-        <app-button
-          routerLink="create"
-          buttonText="Add Your Own Building"
-          styles="px-5 py-2.5 rounded-lg w-full mt-4"
-        ></app-button>
-      </div>
+    <div class="container mx-auto px-2 mt-8">
       <div class="flex flex-wrap -mx-4">
-        <div
-          class="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/4 px-4 mb-4"
-          *ngFor="let building of buildings$ | async"
-        >
+        <ng-container *ngIf="!(isLoading$ | async); else loadingBlock">
           <div
-            class="shadow-lg cursor-pointer rounded-md overflow-hidden hover:shadow-xl transition-all ease-in-out duration-300 hover:scale-105"
-            [routerLink]="['detail/' + building.id]"
+            [@fade]
+            class="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/4 mb-4 px-2"
+            *ngFor="let building of buildings$ | async as buildings"
           >
-            <img
-              class="w-full h-64 object-cover"
-              [src]="building.image_url"
-              alt="Building image"
-            />
-            <div class="px-6 py-4">
-              <h5 class="font-bold text-xl mb-2">
-                {{ building.building_address }}
-              </h5>
-              <p class="text-gray-700 text-base">
-                Contact: {{ building.building_contact_name }}
-              </p>
-              <p class="text-gray-700 text-base">
-                Email: {{ building.building_contact_email }}
-              </p>
-              <p class="text-gray-700 text-base">
-                Square Footage: {{ building.square_footage }}
-              </p>
+            <app-building-card [building]="building"></app-building-card>
+          </div>
+        </ng-container>
+
+        <ng-template #loadingBlock>
+          <div
+            class="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/4 px-2 mb-4"
+            *ngFor="let i of [].constructor(10)"
+            [@fade]
+          >
+            <div
+              class="animate-pulse shadow-lg cursor-pointer rounded-md overflow-hidden w-full"
+            >
+              <div
+                class="flex items-center justify-center h-64 bg-gray-300 rounded-t dark:bg-gray-700"
+              >
+                <app-placeholder-icon></app-placeholder-icon>
+              </div>
+              <div class="px-6 py-4">
+                <div
+                  class="h-5 bg-gray-200 rounded-full dark:bg-gray-700 w-full mb-4"
+                ></div>
+                <div
+                  class="h-4 bg-gray-200 rounded-full dark:bg-gray-700 mb-2.5"
+                ></div>
+                <div
+                  class="h-4 bg-gray-200 rounded-full dark:bg-gray-700 mb-2.5"
+                ></div>
+                <div
+                  class="h-4 bg-gray-200 rounded-full dark:bg-gray-700 mb-2.5"
+                ></div>
+              </div>
             </div>
           </div>
-        </div>
+        </ng-template>
       </div>
 
-<!-- Pagination -->
-
-<nav aria-label="Page navigation example">
-  <ul class="inline-flex -space-x-px">
-    <li >
-      <a  class="px-3 py-2 ml-0 leading-tight text-white bg-green-300 border border-green-500 rounded-l-lg hover:bg-green-400 hover:text-white-800 dark:bg-green-800 dark:border-green-700 dark:text-white-400 dark:hover:bg-green-700 dark:hover:text-gray-100">Previous</a>
-    </li>
-    <li >
-      <a  class="px-3 py-2 text-white border border-green-300 bg-green-600 hover:bg-green-500 hover:text-white-700 dark:border-green-700 dark:bg-green-700">1</a>
-    </li>
-    <li *ngIf="currentPage > 1">
-      <a  class="px-3 py-2 leading-tight text-white bg-green-300 border border-green-500 rounded-l-lg hover:bg-green-400 hover:text-white-800 dark:bg-green-800 dark:border-green-700 dark:text-green-400 dark:hover:bg-green-700 dark:hover:text-gray-100">2</a>
-    </li>
-    <li *ngIf="currentPage > 2 ">
-      <a  aria-current="page" class="px-3 py-2 text-white border border-green-300 bg-green-600 hover:bg-green-100 hover:text-white-700 dark:border-green-700 dark:bg-green-700">3</a>
-    </li>
-    <li *ngIf="currentPage < totalPages">
-      <a  class="px-3 py-2 leading-tight text-white bg-green-300 border border-green-500 rounded-l-lg hover:bg-green-400 hover:text-white-800 dark:bg-green-800 dark:border-green-700 dark:text-white-400 dark:hover:bg-green-700 dark:hover:text-gray-100">4</a>
-    </li>
-    <li *ngIf="currentPage < totalPages - 1">
-      <a  class="px-3 py-2 leading-tight text-white bg-green-300 border border-green-500 rounded-l-lg hover:bg-green-400 hover:text-white-800 dark:bg-green-800 dark:border-green-700 dark:text-white-400 dark:hover:bg-green-700 dark:hover:text-gray-100">5</a>
-    </li>
-    <li>
-      <a  class="px-3 py-2 leading-tight text-white bg-green border border-green-300 rounded-r-lg hover:bg-green-100 hover:text-white dark:bg-green-800 dark:border-green-700 dark:text-white dark:hover:bg-green-700 dark:hover:text-white" (click)="nextPage()">Next</a>
-    </li>
-  </ul>
-</nav>
-
-
+      <!-- Pagination -->
+      <div class="mt-6 flex justify-center">
+        <button
+          class="border border-gray-500 hover:border-gray-700 rounded-md text-gray-500 hover:text-gray-700 px-4 py-2 mx-2"
+          (click)="previousPage()"
+          [disabled]="(currentPage$ | async) === 1"
+        >
+          Previous
+        </button>
+        <div class="flex items-center px-4 py-2">
+          Page {{ currentPage$ | async }} of {{ totalPages$ | async }}
+        </div>
+        <button
+          class="border border-gray-500 hover:border-gray-700 rounded-md text-gray-500 hover:text-gray-700 px-4 py-2 mx-2"
+          (click)="nextPage()"
+          [disabled]="(currentPage$ | async) === (totalPages$ | async)"
+        >
+          Next
+        </button>
+      </div>
+    </div>
   `,
+  animations: [AnimationsModule.fade],
 })
-export class BuildingsComponent {
-
-  public currentPage = 1;
-  public totalPages = 0;
-
-  public buildings$ = this.buildingsService.getBuildings().pipe(
-    tap((data) => console.log(data)),
-    map((data: any) => data.data.buildings)
-  )
+export class BuildingsComponent implements OnInit {
+  currentPage$!: Observable<number>;
+  totalPages$!: Observable<number>;
+  isLoading$!: Observable<boolean>;
+  buildings$!: Observable<Building[]>;
 
   constructor(
     private buildingsService: BuildingService,
-    public userService: UserService
+    private route: ActivatedRoute,
+    public userService: UserService,
+    private router: Router
   ) {}
 
+  ngOnInit() {
+    const buildingsData$ = this.route.queryParams.pipe(
+      switchMap((params) =>
+        this.buildingsService.getBuildings(params['page'] || 1)
+      ),
+      shareReplay(1)
+    );
+    this.buildings$ = buildingsData$.pipe(
+      map((data: any) => data.data.buildings)
+    );
+    this.totalPages$ = buildingsData$.pipe(
+      map((data: any) => data.data.pagination.total_pages)
+    );
+    this.currentPage$ = this.route.queryParams.pipe(
+      map((params) => (params['page'] ? Number(params['page']) : 1))
+    );
+    const loading$ = of(true).pipe(delay(1000));
+    const dataArrived$ = buildingsData$.pipe(map(() => false));
+    this.isLoading$ = race(loading$, dataArrived$).pipe(startWith(true));
+  }
+
   public nextPage(): void {
-    if (this.currentPage < this.totalPages) {
-      this.currentPage++;
-    }
-}
+    this.currentPage$.pipe(take(1)).subscribe((currentPage) => {
+      this.router.navigate([`/buildings`], {
+        queryParams: { page: currentPage + 1 },
+      });
+    });
+  }
 
-
+  public previousPage(): void {
+    this.currentPage$.pipe(take(1)).subscribe((currentPage) => {
+      if (currentPage > 1) {
+        this.router.navigate(['/buildings'], {
+          queryParams: { page: currentPage - 1 },
+        });
+      }
+    });
+  }
 }

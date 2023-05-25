@@ -6,7 +6,6 @@ import { Router, Event, NavigationEnd, ActivatedRoute } from '@angular/router';
 import { filter, map } from 'rxjs/operators';
 import { LandingComponent } from './features/landing/landing.component';
 
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -39,7 +38,6 @@ export class AppComponent implements OnInit {
       )
       .subscribe((route) => {
         this.showNavbar = route.component !== LandingComponent;
-        console.log(this.showNavbar);
       });
 
     const token = this.cookieService.get('token');

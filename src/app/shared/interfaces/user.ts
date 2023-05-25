@@ -1,18 +1,18 @@
 export interface CreateUser {
-  email: string
-  password: string
+  email: string;
+  password: string;
 }
 
-export interface UserResponse<T>{
+export interface UserResponse<T> {
   token: string;
   expires_in: number;
   refresh_token: string;
-  token_type: 'Bearer'
-  resource_owner: T
+  token_type: 'Bearer';
+  resource_owner: T;
 }
 
 export interface User {
-   //first_name: string;
-   //last_name: string;
+  //first_name: string;
+  //last_name: string;
   email: string;
 }

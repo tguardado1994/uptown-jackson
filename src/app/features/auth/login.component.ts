@@ -141,11 +141,13 @@ export class LoginComponent implements OnDestroy {
               message: 'Welcome Back!',
             });
             this.userService.setUser(res);
-            this.router.navigate(['/buildings']);
+            this.router.navigate(['/account']);
           },
           error: (err) => {
             this.loading = false;
-            const errors = err.error.error_description;
+            const errors = err.error.error_description
+              ? err.error.error_description
+              : ['Failed To Login'];
             errors.forEach((message: string) => {
               this.toastService.showToast({
                 type: 'error',

@@ -3,7 +3,7 @@ import { environment } from 'src/environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BaseResponse, Building, CreateBuilding } from '../interfaces/building';
 import { CookieService } from 'ngx-cookie-service';
-import { throwError } from 'rxjs';
+import { Observable, catchError, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -19,9 +19,9 @@ export class BuildingService {
     );
   }
 
-  getBuildings() {
+  getBuildings(page: number) {
     return this.http.get<BaseResponse<Building[]>>(
-      this.BASE_URL + '/buildings/index'
+      this.BASE_URL + `/buildings/index?page=${page}`
     );
   }
 
@@ -42,16 +42,77 @@ export class BuildingService {
     }
   }
 
-  editBulding(id: number, building: Building) {
-    return this.http.put<BaseResponse<Building>>(
-      this.BASE_URL + `/buildings/${id}`,
-      building
-    );
+  updateBuilding(building: Building) {
+    const token = this.cookieService.get('token');
+    if (token) {
+      const headers = new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      });
+      return this.http.patch<BaseResponse<Building>>(
+        this.BASE_URL + '/buildings/update',
+        building,
+        { headers: headers }
+      );
+    } else {
+      return throwError(new Error('No token found'));
+    }
   }
 
+  // editBuilding(id: number, building: Building) {
+  //   const token = this.cookieService.get('token');
+  //   if (token) {
+  //     const headers = new HttpHeaders({
+  //       'Content-Type': 'application/json',
+  //       Authorization: `Bearer ${token}`,
+  //     });
+
+  //     return this.http
+  //       .put<BaseResponse<Building>>(
+  //         this.BASE_URL + `/buildings/${id}`,
+  //         building,
+  //         { headers: headers }
+  //       )
+  //       .pipe(
+  //         catchError((error) => {
+  //           console.error('Error editing building:', error);
+  //           return throwError(error);
+  //         })
+  //       );
+  //   } else {
+  //     return throwError(new Error('Token not found'));
+  //   }
+  // }
+
   deleteBuilding(id: number) {
-    return this.http.delete<BaseResponse<Building>>(
-      this.BASE_URL + `/buildings/${id}`
-    );
+    const token = this.cookieService.get('token');
+    if (token) {
+      const headers = new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      });
+      return this.http.delete<BaseResponse<Building>>(
+        this.BASE_URL + `/buildings/${id}`,
+        { headers: headers }
+      );
+    } else {
+      return throwError(new Error('Token not found'));
+    }
+  }
+
+  fetchAllBuildingsFromUser() {
+    const token = this.cookieService.get('token');
+    if (token) {
+      const headers = new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      });
+      return this.http.get<BaseResponse<Building[]>>(
+        this.BASE_URL + '/buildings/user',
+        { headers: headers }
+      );
+    } else {
+      return throwError(new Error('No token found'));
+    }
   }
 }

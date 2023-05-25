@@ -26,14 +26,17 @@ const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent,
+    // canActivate: [AuthRedirect]
   },
   {
     path: 'signup',
     component: SignupComponent,
+    // canActivate:[AuthRedirect]
   },
   {
     path: 'account',
     component: AccountComponent,
+    // canActivate: [AuthGuard],
   },
   {
     path: 'buildings',
@@ -42,12 +45,12 @@ const routes: Routes = [
       {
         path: 'create',
         component: BuildingCreateFormComponent,
-        canActivate: [AuthGuard],
+        // canActivate: [AuthGuard],
       },
       {
-        path: 'edit',
+        path: 'edit/:id',
         component: BuildingEditFormComponent,
-        canActivate: [AuthGuard],
+        // canActivate: [AuthGuard],
       },
       {
         path: 'detail/:id',

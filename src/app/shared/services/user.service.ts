@@ -53,6 +53,21 @@ export class UserService {
     );
   }
 
+  updateUser(user: User) {
+    const token = this.cookieService.get('token');
+    if (token) {
+      const headers = new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      });
+      return this.http.patch<any>(this.BASE_URL + '/users/update', user, {
+        headers: headers,
+      });
+    } else {
+      return throwError(new Error('No token found'));
+    }
+  }
+
   login(email: string, password: string) {
     return this.http.post<UserResponse<User>>(
       this.BASE_URL + '/users/tokens/sign_in',
@@ -93,11 +108,11 @@ export class UserService {
             return of(this.user);
           }),
           catchError((err) => {
+            console.log(err);
             this._loading.next(false);
             if (err.status === 401) {
               return this.refreshToken().pipe(
                 switchMap((res) => {
-                  console.log(res);
                   this.setUser(res);
                   return of(this.autoLogin());
                 })

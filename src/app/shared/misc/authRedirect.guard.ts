@@ -11,7 +11,7 @@ import { map, take } from 'rxjs/operators';
 import { UserService } from 'src/app/shared/services/user.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthRedirect implements CanActivate {
   constructor(private userService: UserService, private router: Router) {}
