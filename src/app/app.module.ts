@@ -30,7 +30,10 @@ import { FooterComponent } from './features/footer/footer.component';
 import { PencilIconComponent } from './shared/components/icons/pencil-icon.component';
 import { PhoneIconComponent } from './shared/components/icons/phone-icon.component';
 import { ClipboardIconComponent } from './shared/components/icons/clipboard-icon.component';
-
+import { PlusIconComponent } from './shared/components/icons/plus-icon.component';
+import { ModalComponent } from './shared/components/ui/modal.component';
+import { BuildingCardComponent } from './features/buildings/building-card.component';
+import { PlaceholderIconComponent } from './shared/components/icons/placeholder-icon.component';
 
 @NgModule({
   declarations: [
@@ -58,8 +61,10 @@ import { ClipboardIconComponent } from './shared/components/icons/clipboard-icon
     PencilIconComponent,
     PhoneIconComponent,
     ClipboardIconComponent,
-  
-
+    PlusIconComponent,
+    ModalComponent,
+    BuildingCardComponent,
+    PlaceholderIconComponent,
   ],
 
   imports: [

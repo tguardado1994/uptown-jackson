@@ -28,4 +28,11 @@ export class AnimationsModule {
     transition('void => *', animate('300ms ease-in-out')),
     transition('* => void', animate('300ms ease-in-out')),
   ]);
+
+  static modalFade = trigger('modalFade', [
+    state('void', style({ opacity: 0 })),
+    state('*', style({ opacity: 1 })),
+    transition('void => *', animate('100ms ease-in-out')),
+    transition('* => void', animate('100ms ease-in-out')),
+  ]);
 }
