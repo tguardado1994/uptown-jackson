@@ -10,12 +10,18 @@ import { AuthGuard } from './shared/misc/auth.guard';
 import { LandingComponent } from './features/landing/landing.component';
 import { AccountComponent } from './features/account/account.component';
 import { AuthRedirect } from './shared/misc/authRedirect.guard';
+import { AboutUsComponent } from './about-us/about-us.component';
 
 const routes: Routes = [
   {
     path: '',
     component: LandingComponent,
     canActivate: [AuthRedirect],
+  },
+
+  {
+    path: 'about',
+    component: AboutUsComponent,
   },
   {
     path: 'login',

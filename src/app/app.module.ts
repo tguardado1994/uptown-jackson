@@ -30,6 +30,7 @@ import { FooterComponent } from './features/footer/footer.component';
 import { PencilIconComponent } from './shared/components/icons/pencil-icon.component';
 import { PhoneIconComponent } from './shared/components/icons/phone-icon.component';
 import { ClipboardIconComponent } from './shared/components/icons/clipboard-icon.component';
+import { AboutUsComponent } from './about-us/about-us.component';
 
 
 @NgModule({
@@ -58,6 +59,7 @@ import { ClipboardIconComponent } from './shared/components/icons/clipboard-icon
     PencilIconComponent,
     PhoneIconComponent,
     ClipboardIconComponent,
+    AboutUsComponent,
 
   ],
 

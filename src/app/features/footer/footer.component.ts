@@ -7,7 +7,8 @@ import { Component, OnInit } from '@angular/core';
       <div class="container mx-auto text-center">
         <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div>
-            <h3 class="text-xl mb-4 font-semibold underline">About Us</h3>
+            <h3 routerLink="/about" class="text-xl mb-4 font-semibold underline">About Us</h3>
+
             <ul class="space-y-2 text-sm">
               <li><a class="hover:text-gray-300">Company</a></li>
               <li><a class="hover:text-gray-300">Team</a></li>
