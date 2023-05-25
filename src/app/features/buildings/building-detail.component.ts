@@ -25,7 +25,7 @@ import { BuildingService } from 'src/app/shared/services/building.service';
           <p>Square Footage: {{ building.square_footage }}</p>
 
       <!-- Buttons -->
-    <button class="btn btn-primary" (click)="editBuilding()">Edit</button>
+    <button class="btn btn-primary" (click)="editBuilding(building.id)">Edit</button>
       <!--<button class="btn btn-danger" (click)="this.buildingService.deleteBuilding(building.id)">Delete</button>-->
 
         </div>
@@ -58,8 +58,8 @@ export class BuildingDetailComponent implements OnInit {
     );
   }
 
-  editBuilding() {
+  editBuilding(buildingId: number) {
     // Logic to navigate to the edit page for the building
-    this.router.navigate(['/buildings/edit']);
+    this.router.navigate(['/buildings/edit', buildingId]);
   }
 }
