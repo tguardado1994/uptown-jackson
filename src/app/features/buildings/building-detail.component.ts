@@ -29,7 +29,7 @@ import { BuildingService } from 'src/app/shared/services/building.service';
       >
         Contact: {{ building.building_contact_email }}
       </a>
-      <button class="btn btn-primary" (click)="editBuilding(building.id)">Edit</button>
+
     </div>
   `,
 })
