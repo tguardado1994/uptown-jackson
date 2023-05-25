@@ -60,6 +60,8 @@ export class BuildingService {
     }
   }
 
+
+
   deleteBuilding(id: number) {
     return this.http.delete<BaseResponse<Building>>(
       this.BASE_URL + `/buildings/${id}`

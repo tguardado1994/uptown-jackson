@@ -9,7 +9,7 @@ import { Building } from 'src/app/shared/interfaces/building';
   template: `
    <h1>Edit Building Listing</h1>
 
-<form [formGroup]="editFormGroup" >
+<form [formGroup]="editFormGroup" (click)="onSubmit()">
   <label>Building Address</label>
   <input type= "text" class="form-control" formControlName="address"><br><br>
 
@@ -28,7 +28,7 @@ import { Building } from 'src/app/shared/interfaces/building';
   <input type="text" class="form-control" formControlName="image_path">
 
   <div class="space">
-  <input (click)="onSubmit()" type="submit" value="Edit">
+  <button type="submit" (click)="onSubmit()">Edit</button>
 </div>
 
 </form>
@@ -39,29 +39,23 @@ import { Building } from 'src/app/shared/interfaces/building';
 })
 export class BuildingEditFormComponent implements OnInit {
 
-  @Input() building: Building | undefined;
+
   editFormGroup: any;
 
-  constructor(private buildingService:BuildingService, private route: Router) { }
+  constructor(private buildingService:BuildingService, private route: Router){}
 
   ngOnInit(): void {
-    this.editFormGroup = new FormGroup({
-    address: new FormControl(this.building?.building_address),
-    contact: new FormControl(this.building?.building_contact_name),
-    image_path: new FormControl(this.building?.image_url),
-    email: new FormControl(this.building?.building_contact_email),
-    square_footage: new FormControl(this.building?.square_footage)
-  })
-
+      this.editFormGroup = new FormGroup({
+        address: new FormControl(),
+        contact: new FormControl(),
+        email: new FormControl(),
+        square_footage: new FormControl(),
+        image_path: new FormControl()
+      });
   }
 
   onSubmit(){
-    const editedBuilding = this.editFormGroup.value;
-    this.buildingService.editBuilding(this.building?.id || 0, editedBuilding).subscribe({
-      next: (res: any) => {
 
-      },
-    });
   }
 
 }

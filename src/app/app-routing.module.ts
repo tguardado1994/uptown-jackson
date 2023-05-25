@@ -39,7 +39,7 @@ const routes: Routes = [
         canActivate: [AuthGuard],
       },
       {
-        path: 'edit',
+        path: 'edit/:id',
         component: BuildingEditFormComponent,
         canActivate: [AuthGuard],
       },
