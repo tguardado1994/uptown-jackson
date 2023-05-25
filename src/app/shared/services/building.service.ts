@@ -3,7 +3,7 @@ import { environment } from 'src/environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BaseResponse, Building, CreateBuilding } from '../interfaces/building';
 import { CookieService } from 'ngx-cookie-service';
-import { throwError } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -42,11 +42,22 @@ export class BuildingService {
     }
   }
 
-  editBulding(id: number, building: Building) {
-    return this.http.put<BaseResponse<Building>>(
-      this.BASE_URL + `/buildings/${id}`,
-      building
-    );
+  editBuilding(id: number, building: Building) {
+    const token = this.cookieService.get('token');
+    if (token) {
+      const headers = new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      });
+
+      return this.http.put<BaseResponse<Building>>(
+        this.BASE_URL + `/buildings/${id}`,
+        building,
+        { headers: headers }
+      );
+    } else {
+      return throwError(new Error('Token not found'));
+    }
   }
 
   deleteBuilding(id: number) {
