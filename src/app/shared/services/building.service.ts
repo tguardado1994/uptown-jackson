@@ -3,13 +3,14 @@ import { environment } from 'src/environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BaseResponse, Building, CreateBuilding } from '../interfaces/building';
 import { CookieService } from 'ngx-cookie-service';
-import { Observable, catchError, throwError } from 'rxjs';
+import { BehaviorSubject, Observable, catchError, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class BuildingService {
   BASE_URL = environment.API_URL;
+  public loadBuildings = new BehaviorSubject(null);
 
   constructor(private http: HttpClient, private cookieService: CookieService) {}
 

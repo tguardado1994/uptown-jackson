@@ -12,7 +12,8 @@ export interface UserResponse<T> {
 }
 
 export interface User {
-  //first_name: string;
-  //last_name: string;
   email: string;
+  first_name?: string;
+  last_name?: string;
+  phone?: string;
 }

@@ -523,7 +523,7 @@ export class LandingComponent implements OnInit {
       title: 'Buy or Sell',
       text: 'Click here to find businesses located in Uptown Jackson!',
       buttonText: 'Listings',
-      buttonUrl: 'about',
+      buttonUrl: 'buildings',
       imageUrl: '/assets/forSale.jpeg',
     },
     {
@@ -531,7 +531,7 @@ export class LandingComponent implements OnInit {
       title: 'Business Directory',
       text: '',
       buttonText: 'Explore',
-      buttonUrl: 'buildings',
+      buttonUrl: 'about',
       imageUrl: '/assets/businessDirectory.jpeg',
     },
   ];

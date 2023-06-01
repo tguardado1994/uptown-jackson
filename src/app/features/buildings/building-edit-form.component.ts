@@ -29,11 +29,15 @@ import { AnimationsModule } from 'src/app/shared/modules/animations.module';
           class="border border-gray-300 px-4 py-2 rounded-lg mb-4 w-full"
           formControlName="building_address"
         />
-        <div *ngIf="buildingEditForm.controls['building_address'].invalid && (buildingEditForm.controls['building_address'].dirty || buildingEditForm.controls['building_address'].touched)">
+        <div
+          *ngIf="
+            buildingEditForm.controls['building_address'].invalid &&
+            (buildingEditForm.controls['building_address'].dirty ||
+              buildingEditForm.controls['building_address'].touched)
+          "
+        >
           <p class="text-red-500">Building Address is required.</p>
         </div>
-
-
 
         <label class="block mb-2">Contact Name</label>
         <input
@@ -41,11 +45,15 @@ import { AnimationsModule } from 'src/app/shared/modules/animations.module';
           class="border border-gray-300 px-4 py-2 rounded-lg mb-4 w-full"
           formControlName="building_contact_name"
         />
-        <div *ngIf="buildingEditForm.controls['building_contact_name'].invalid && (buildingEditForm.controls['building_contact_name'].dirty || buildingEditForm.controls['building_contact_name'].touched)">
+        <div
+          *ngIf="
+            buildingEditForm.controls['building_contact_name'].invalid &&
+            (buildingEditForm.controls['building_contact_name'].dirty ||
+              buildingEditForm.controls['building_contact_name'].touched)
+          "
+        >
           <p class="text-red-500">Contact Name is required.</p>
         </div>
-
-
 
         <label class="block mb-2">Contact Email</label>
         <input
@@ -53,11 +61,15 @@ import { AnimationsModule } from 'src/app/shared/modules/animations.module';
           class="border border-gray-300 px-4 py-2 rounded-lg mb-4 w-full"
           formControlName="building_contact_email"
         />
-        <div *ngIf="buildingEditForm.controls['building_contact_email'].invalid && (buildingEditForm.controls['building_contact_email'].dirty || buildingEditForm.controls['building_contact_email'].touched)">
+        <div
+          *ngIf="
+            buildingEditForm.controls['building_contact_email'].invalid &&
+            (buildingEditForm.controls['building_contact_email'].dirty ||
+              buildingEditForm.controls['building_contact_email'].touched)
+          "
+        >
           <p class="text-red-500">Please enter a valid Contact Email.</p>
         </div>
-
-
 
         <label class="block mb-2">Square Footage</label>
         <input
@@ -65,7 +77,13 @@ import { AnimationsModule } from 'src/app/shared/modules/animations.module';
           class="border border-gray-300 px-4 py-2 rounded-lg mb-4 w-full"
           formControlName="square_footage"
         />
-        <div *ngIf="buildingEditForm.controls['square_footage'].invalid && (buildingEditForm.controls['square_footage'].dirty || buildingEditForm.controls['square_footage'].touched)">
+        <div
+          *ngIf="
+            buildingEditForm.controls['square_footage'].invalid &&
+            (buildingEditForm.controls['square_footage'].dirty ||
+              buildingEditForm.controls['square_footage'].touched)
+          "
+        >
           <p class="text-red-500">Square Footage is required.</p>
         </div>
 
@@ -75,9 +93,15 @@ import { AnimationsModule } from 'src/app/shared/modules/animations.module';
           class="border border-gray-300 px-4 py-2 rounded-lg mb-4 w-full"
           formControlName="image_url"
         />
-        <div *ngIf="buildingEditForm.controls['image_url'].invalid && (buildingEditForm.controls['image_url'].dirty || buildingEditForm.controls['image_url'].touched)">
-     <p class="text-red-500">Image URL is required.</p>
-       </div>
+        <div
+          *ngIf="
+            buildingEditForm.controls['image_url'].invalid &&
+            (buildingEditForm.controls['image_url'].dirty ||
+              buildingEditForm.controls['image_url'].touched)
+          "
+        >
+          <p class="text-red-500">Image URL is required.</p>
+        </div>
 
         <div class="grid grid-cols-1 md:gap-6 gap-2 md:grid-cols-2">
           <app-button
@@ -118,7 +142,7 @@ export class BuildingEditFormComponent implements OnInit, OnDestroy {
       building_contact_name: [null, [Validators.required]],
       building_contact_email: [null, [Validators.required, Validators.email]],
       square_footage: [null, [Validators.required]],
-      image_url: [null,[Validators.required]],
+      image_url: [null, [Validators.required]],
     });
   }
 
@@ -137,6 +161,7 @@ export class BuildingEditFormComponent implements OnInit, OnDestroy {
             image_url: data.image_url,
           };
           this.buildingEditForm.setValue(formInstance);
+          window.scrollTo({ top: 0, behavior: 'smooth' });
         })
       );
     });

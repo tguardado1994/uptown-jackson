@@ -10,6 +10,7 @@ import {
 import { AnimationsModule } from 'src/app/shared/modules/animations.module';
 import { BuildingService } from 'src/app/shared/services/building.service';
 import { ToastService } from 'src/app/shared/services/toast.service';
+import { Building } from 'src/app/shared/interfaces/building';
 
 @Component({
   selector: 'app-account',
@@ -272,10 +273,11 @@ export class AccountComponent implements OnInit {
     this.showModal = true;
   }
 
-  public buildings$ = this.buildingService.fetchAllBuildingsFromUser().pipe(
-    map((response) => response.data),
-    shareReplay(1)
-  );
+  // public buildings$ = this.buildingService.fetchAllBuildingsFromUser().pipe(
+  //   map((response) => response.data),
+  //   shareReplay(1)
+  // );
+  public buildings$ = new Observable<Building[]>();
 
   public user$ = this.userService.user.pipe(
     tap((user) => {
@@ -308,10 +310,22 @@ export class AccountComponent implements OnInit {
         ],
       ],
     });
+    this.fetchAllBuildingsFromUser();
   }
 
   ngOnInit(): void {
     this.accountForm.disable();
+    this.buildingService.loadBuildings.subscribe(() => {
+      this.fetchAllBuildingsFromUser();
+    });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  fetchAllBuildingsFromUser() {
+    this.buildings$ = this.buildingService.fetchAllBuildingsFromUser().pipe(
+      map((response) => response.data),
+      shareReplay(1)
+    );
   }
 
   toggleEdit() {

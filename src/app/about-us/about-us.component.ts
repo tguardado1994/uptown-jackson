@@ -1,12 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 
+interface Director {
+  role: string;
+  name: string;
+  image: string;
+}
 @Component({
   selector: 'app-about-us',
   templateUrl: './about-us.component.html',
   styleUrls: ['./about-us.component.css'],
 })
 export class AboutUsComponent implements OnInit {
-  boardOfDirectors = [
+  public boardOfDirectors: Director[] = [
     {
       role: 'President',
       name: 'Hunter Williams',
@@ -61,5 +66,7 @@ export class AboutUsComponent implements OnInit {
 
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
 }

@@ -102,6 +102,7 @@ export class BuildingsComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
     const buildingsData$ = this.route.queryParams.pipe(
       switchMap((params) =>
         this.buildingsService.getBuildings(params['page'] || 1)
@@ -123,6 +124,7 @@ export class BuildingsComponent implements OnInit {
   }
 
   public nextPage(): void {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
     this.currentPage$.pipe(take(1)).subscribe((currentPage) => {
       this.router.navigate([`/buildings`], {
         queryParams: { page: currentPage + 1 },
@@ -131,6 +133,7 @@ export class BuildingsComponent implements OnInit {
   }
 
   public previousPage(): void {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
     this.currentPage$.pipe(take(1)).subscribe((currentPage) => {
       if (currentPage > 1) {
         this.router.navigate(['/buildings'], {
